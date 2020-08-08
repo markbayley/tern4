@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, UncontrolledDropdown } from 'reactstrap';
 
 export default class TERNDataDropdown extends React.Component {
   constructor(props) {
@@ -30,20 +30,22 @@ export default class TERNDataDropdown extends React.Component {
   
   render() {
     return (
-      <Dropdown className="d-inline-block" style={{ color: "white"}}
-      onMouseOver={this.onMouseEnter} onMouseLeave={this.onMouseLeave} isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-        <DropdownToggle  caret tag="span"
-       
-      >
-          TERN Data
-        </DropdownToggle>
-        <DropdownMenu>
-     
-          <DropdownItem>Menu Item</DropdownItem>
-          <DropdownItem divider />
-          <DropdownItem>Another Action</DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
+      <UncontrolledDropdown nav inNavbar>
+        <Dropdown className="d-inline-block" style={{ color: "white"}}
+        onMouseOver={this.onMouseEnter} onMouseLeave={this.onMouseLeave} isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+          <DropdownToggle  caret nav
+        
+        >
+            TERN Data
+          </DropdownToggle>
+          <DropdownMenu>
+      
+            <DropdownItem>Menu Item</DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem>Another Action</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </UncontrolledDropdown>
     );
   }
 }
