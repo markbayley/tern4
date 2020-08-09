@@ -4,7 +4,7 @@ import {Row} from 'react-bootstrap';
 function IconBar() {
     return (
         <div>
-            <Row style={{ position: "absolute", left: "108%", top: "1%"}}>
+            {/* <Row style={{ position: "absolute", left: "108%", top: "1%"}}>
             <img src="img/icons/Location.svg" alt="location" height="40px"/>
             </Row>
 
@@ -18,7 +18,7 @@ function IconBar() {
 
             <Row style={{ position: "absolute", left: "108%", top: "7%"}}>
             <img src="img/icons/frequency.svg" alt="location" height="40px"/>
-          </Row>      
+          </Row>       */}
         </div>
     )
 }

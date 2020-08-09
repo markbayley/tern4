@@ -128,18 +128,22 @@ body {
   align-content: 'center';
 }
 .site-branding img {
-  max-width: 300px;
+  max-width: 220px;
 }
 .searchbar {
   display: "flex";
   justify-content: "center";
-  background-image: url(/img/icons/search-bar2.png);
-  background-repeat: no-repeat;
+  align-items: center;
+  width:400px !important;
+  border: 1px solid #888888;
+  border-radius: 24px;
 }
-.searchbar:hover {
-  background-image: url(/images/search-bar2-dark.png);
-  transition: background 5s;
+.searchbar svg{
+  width: 32px;
+    margin-left: 12px;
+    margin-top: 12px;
 }
+
 .searchbutton {
   background-image: url(/img/icons/search-arrow.svg);
   background-repeat: no-repeat;
@@ -148,27 +152,22 @@ body {
   background-image: url(/img/icons/search-arrow-light.svg);
   background-repeat: no-repeat;
   background-color: #065f65;
-  transition: background 1s;
+  transition: background 800ms;
 }
 .searchicon {
   background-image: url(/img/icons/search-bioimages-icon.svg);
 }
 #place {
-  background-color: rgba(0, 0, 0, 0);
-  color: white;
   border: none;
   outline: none;
-  height: 30px;
-  transition: height 1s;
-  -webkit-transition: height 1s;
 }
 #place::placeholder {
   color: #065f65;
   opacity: 1;
-}
-#place:hover {
-  color: #fff;
-  opacity: 1;
+} 
+#place:focus{
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 
@@ -424,6 +423,9 @@ body {
   .navbar-collapse{
     width:100% !important;
   }
+  .addlinks-nav{
+    flex-direction:row !important;
+  }
 }
 a.addlinks{
   font-size: 15px;
@@ -446,18 +448,21 @@ a.search-link.addlinks{
   background-position: 8px 17px;
   background-repeat: no-repeat;
   background-size: 18px;
-  padding-left: 32px;
-  padding-right: 24px;
+  padding-left: 32px !important;
+  padding-right: 24px !important;
 }
 @media(min-width:768px){
   .datalinks-for-sm{
-    display: none;
+    display: none !important;
   }
 }
 @media(max-width:768px){
   .datalinks-for-lg{
-    display: none;
+    display: none !important;
   }
+}
+.navbar-dark .navbar-nav .nav-link{
+  color: #ffffff !important;  
 }
 
 /* .above-header-section {

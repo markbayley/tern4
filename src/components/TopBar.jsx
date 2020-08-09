@@ -3,7 +3,7 @@ import TERNDataDropdown from "./dropdowns/TERNDataDropdown";
 import CommunityDropdown from "./dropdowns/CommunityDropdown";
 import CoESRADropdown from "./dropdowns/CoESRADropdown";
 import DataVisualiserDropdown from "./dropdowns/DataVisualiserDropdown";
-import { Nav, NavItem, Navbar,NavbarBrand } from "react-bootstrap";
+import { Nav, NavItem, Navbar,NavbarBrand, NavLink } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 export default function TopBar() {
@@ -12,16 +12,16 @@ export default function TopBar() {
       <div>
         <div className="above-header">
           <div className="container">
-            <div className="above-header-section-wrap d-flex">
+            <div>
               
                   <Navbar color="dark" dark expand="md" className="navbar-dark navbar-expand-sm" >
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <div className="datalinks-for-sm">
-                      <NavbarBrand href="/" className="user-select addlinks"><img src="img/logo-mini-all.png" alt="logo" /></NavbarBrand>
-                      <NavbarBrand href="/" className="addlinks search-link">Data</NavbarBrand>
-                    </div>
+                      <div className="datalinks-for-sm">
+                        <NavbarBrand href="/" className="user-select addlinks"><img src="img/logo-mini-all.png" alt="logo" /></NavbarBrand>
+                        <NavbarBrand href="/" className="addlinks search-link">Data</NavbarBrand>
+                      </div>
                     <Navbar.Collapse id="basic-navbar-nav">
-                      <Nav navbar>
+                      <Nav navbar className="ml-auto">
                         <NavItem>
                           <TERNDataDropdown />
                         </NavItem>
@@ -36,10 +36,14 @@ export default function TopBar() {
                         </NavItem>
                       </Nav>
                     </Navbar.Collapse>
-                    <div className="datalinks-for-lg">
-                      <NavbarBrand href="/" className="user-select addlinks"><img src="img/logo-mini-all.png" alt="logo" /></NavbarBrand>
-                      <NavbarBrand href="/" className="addlinks search-link">Data</NavbarBrand>
-                    </div>
+                    <Nav navbar className="ml-auto addlinks-nav datalinks-for-lg">
+                      <NavItem>
+                        <NavLink href="/" className="user-select addlinks"><img src="img/logo-mini-all.png" alt="logo" /></NavLink>
+                      </NavItem>
+                      <NavItem>
+                        <NavLink href="/" className="addlinks search-link">Data</NavLink>
+                      </NavItem>
+                    </Nav>
                     
                   </Navbar>
                   
