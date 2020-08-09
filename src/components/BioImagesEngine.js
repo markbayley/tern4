@@ -152,7 +152,7 @@ const BioImagesEngine = ({ initFilter }) => {
 
     return (
       <>
-      <div style={{position: 'absolute', right: '75px', top: '150px', zIndex: '10'}} >
+      <div style={{position: 'absolute', right: '75px', bottom: '180px', zIndex: '10'}} >
       {searchmodes.map((searchmode) => (
         <Button  
           variant="light"
