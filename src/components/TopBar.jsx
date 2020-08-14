@@ -3,7 +3,7 @@ import TERNDataDropdown from "./dropdowns/TERNDataDropdown";
 import CommunityDropdown from "./dropdowns/CommunityDropdown";
 import CoESRADropdown from "./dropdowns/CoESRADropdown";
 import DataVisualiserDropdown from "./dropdowns/DataVisualiserDropdown";
-import { Col, Row, Navbar } from "react-bootstrap";
+import { Nav, NavItem, Navbar,NavbarBrand, NavLink } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 export default function TopBar() {
@@ -12,46 +12,42 @@ export default function TopBar() {
       <div>
         <div className="above-header">
           <div className="container">
-            <div className="above-header-section-wrap d-flex">
-              <Navbar expand="lg" style={{ padding: "0%" }}>
-                <Navbar.Toggle aria-controls="basic-navbar-nav"  style={{float: 'left'}}/>
-                <Navbar.Collapse id="basic-navbar-nav">
-                  <Row>
-                    <Col>
-                      {" "}
-                      <TERNDataDropdown />
-                    </Col>
-                    <Col>
-                      {" "}
-                      <DataVisualiserDropdown />
-                    </Col>
-                    <Col style={{ marginLeft: "30px" }}>
-                      {" "}
-                      <CoESRADropdown />
-                    </Col>
-                    <Col style={{ marginLeft: "-20px", marginRight: "20px" }}>
-                      <CommunityDropdown />
-                    </Col>
-                  </Row>
-                </Navbar.Collapse>
-              </Navbar>
-
-              <div className="above-header-section above-header-section-1">
-                <div className="user-select">
-                  <Link to="/">
-                    {" "}
-                    <img src="img/logo-mini-all.png" alt="logo" />{" "}
-                  </Link>
-                </div>
-              </div>
-              <div className="above-header-section above-header-section-2">
-                <div id="data">
-                  {" "}
-                  <Link to="/data" style={{ color: "#fff", fontSize: "15px" }}>
-                    <p className="center">Data</p>
-                  </Link>
-                </div>
-              </div>
+            <div>
+              
+                  <Navbar color="dark" dark expand="md" className="navbar-dark navbar-expand-sm" >
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                      <div className="datalinks-for-sm">
+                        <NavbarBrand href="/" className="user-select addlinks"><img src="img/logo-mini-all.png" alt="logo" /></NavbarBrand>
+                        <NavbarBrand href="/" className="addlinks search-link">Data</NavbarBrand>
+                      </div>
+                    <Navbar.Collapse id="basic-navbar-nav">
+                      <Nav navbar className="ml-auto">
+                        <NavItem>
+                          <TERNDataDropdown />
+                        </NavItem>
+                        <NavItem>
+                          <DataVisualiserDropdown />
+                        </NavItem>
+                        <NavItem>
+                          <CoESRADropdown />
+                        </NavItem>
+                        <NavItem>
+                          <CommunityDropdown />
+                        </NavItem>
+                      </Nav>
+                    </Navbar.Collapse>
+                    <Nav navbar className="ml-auto addlinks-nav datalinks-for-lg">
+                      <NavItem>
+                        <NavLink href="/" className="user-select addlinks"><img src="img/logo-mini-all.png" alt="logo" /></NavLink>
+                      </NavItem>
+                      <NavItem>
+                        <NavLink href="/" className="addlinks search-link">Data</NavLink>
+                      </NavItem>
+                    </Nav>
+                    
+                  </Navbar>
+                  
+              
             </div>
           </div>
         </div>

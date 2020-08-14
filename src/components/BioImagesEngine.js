@@ -152,8 +152,9 @@ const BioImagesEngine = ({ initFilter }) => {
 
   /*Map Image Toggle*/
   const Toggle = () => {
-    const searchmodes = ["Map" && <img src="/img/map.png" width="40px"/>, "Images"];
+    const searchmodes = ["Map", "Images"];
     const [mySearch, setMySearch] = useState("Map");
+    // && <img src="/img/map.png" width="40px"/>
 
     return (
       <>
