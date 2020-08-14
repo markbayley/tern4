@@ -9,7 +9,9 @@ const TopSection = () => {
     <div className="LeftSideBar__TopSection">
       <BurgerButton
         onClick={() => setIsShowSidebar(true)}
+      
       />
+    
     </div>
   );
 };

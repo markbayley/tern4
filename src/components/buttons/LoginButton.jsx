@@ -21,6 +21,7 @@ function LoginButton() {
   return (
     <Button 
       variant="flat"
+   
       size="md"
       disabled={isLoading}
       onClick={!isLoading ? handleClick : null}

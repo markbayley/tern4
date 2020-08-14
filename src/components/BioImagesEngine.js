@@ -152,12 +152,12 @@ const BioImagesEngine = ({ initFilter }) => {
 
   /*Map Image Toggle*/
   const Toggle = () => {
-    const searchmodes = ["Map", "Images"];
+    const searchmodes = ["Map" && <img src="/img/map.png" width="40px"/>, "Images"];
     const [mySearch, setMySearch] = useState("Map");
 
     return (
       <>
-      <div style={{position: 'absolute', right: '5px', top: '80px', zIndex: '10'}} >
+      <div style={{position: 'absolute', right: '85px', top: '75px', zIndex: '10'}} >
       {searchmodes.map((searchmode) => (
         <Button  
           variant="light"

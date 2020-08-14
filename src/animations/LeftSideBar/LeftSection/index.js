@@ -20,23 +20,18 @@ const LeftSection = () => {
           <a
             href="#"
           >
-            Home
+        
+            <img src="img/map1.png" />
           </a>
         </li>
         <li>
           <a
             href="#"
           >
-            Gallery
+          
           </a>
         </li>
-        <li>
-         <a
-            href="#"
-          >
-            About
-          </a>
-        </li>
+   
       </ul>
     
     </div>

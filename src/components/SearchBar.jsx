@@ -94,7 +94,8 @@ function SearchBar() {
                   style={{
                     height: "65px",
                     width: "455px",
-                    paddingLeft: "2%",
+                    paddingLeft: "2%"
+                   
 
                   
                   }}
@@ -140,7 +141,7 @@ function SearchBar() {
         
 
               {/*Login Buttons */}
-              <div className="login">
+              <div className="login" >
               <Link to="/login" 
               style={{ 
                   

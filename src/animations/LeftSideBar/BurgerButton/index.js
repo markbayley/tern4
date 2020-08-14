@@ -7,8 +7,9 @@ const BurgerButton = ({ onClick }) => {
       className="LeftSideBar__BurgerButton"
       role="button"
       onClick={onClick}
+  
     >
-      <img src="img/chevron.png" height="30px"/>
+    <img src="img/chevron.png" height="30px"/>Map
     </div>
   );
 };
