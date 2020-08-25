@@ -123,7 +123,7 @@
   font-family: "museo-sans", sans-serif;
   border: 2px solid #065f65;
   margin: 17% 20% 0% 22%;
-  font-size: 20px;
+  font-size: 18px;
   background-color: #b3d4c9;
   font-weight: 500;
   height: 15vh;
@@ -137,7 +137,9 @@
 
 .no-result-button {
   flex-wrap: nowrap;
-  margin-left: 30px;
+  margin-left: 20px;
+  display: inline-block;
+
 
 }
 
