@@ -14,11 +14,15 @@ const initialSearchState = {
   isLoadingSearch: true,
   hits: [],
   totalDocuments: null,
-  filters: {},
-  aggregation: null,
   selectedFilter: {},
   pagination: { page_size: 32, page_num: 1 },
-  facets: {},
+  // facet values and counts
+  facets: {
+    site_id: { buckets: [] },
+    plot: { buckets: [] },
+    site_visit_id: { buckets: [] },
+    image_type: { buckets: [] },
+  },
 };
 
 const searchReducer = createReducer(initialSearchState, {
@@ -70,6 +74,10 @@ const initialUiState = {
   },
   searchFilters: {
     search_string: "",
+    site_id: [],
+    plot: [],
+    site_visit_id: [],
+    image_type: [],
   },
 };
 

@@ -1,5 +1,5 @@
 // eslint-disable-next-line object-curly-newline
-import { all, takeLatest, put, call } from "redux-saga/effects";
+import { all, takeLatest, put, call, select } from "redux-saga/effects";
 import {
   fetchSearchAction,
   fetchSearchDoneAction,
@@ -10,19 +10,68 @@ import {
 
 import { bioimages } from "./api";
 
-function* fetchSearchSaga(action) {
-  // console.log("SAGA started. action=", action);
+function filtersToParams(filters) {
+  const params = {};
+  Object.keys(filters).forEach((key) => {
+    const value = filters[key];
+    if (!value) {
+      // ignore any non values
+      return;
+    }
+    if (Array.isArray(value)) {
+      if (value.length > 0) {
+        // join all values into comma separated string
+        if (key === "image_type") {
+          // need some special handling for image_sub_types
+          const img_types = [];
+          const img_sub_types = [];
+          value.forEach((item) => {
+            if (item.value.includes("ancillary.")) {
+              const parts = item.value.split(".");
+              img_types.push(parts[0]);
+              img_sub_types.push(parts[1]);
+            } else {
+              img_types.push(item.value);
+            }
+          });
+          if (img_types.length > 0) {
+            params.image_type = img_types.join(",");
+          }
+          if (img_sub_types.length > 0) {
+            params.image_sub_type = img_sub_types.join(",");
+          }
+        } else {
+          params[key] = value.map((item) => item.value).join(",");
+        }
+      }
+    } else {
+      // just one value
+      params[key] = value;
+    }
+  });
+  return params;
+}
+
+function* fetchSearchSaga() {
   try {
-    const { data } = yield call(bioimages.fetchSearch, action.payload);
+    // TODO: state may not be accurate at this stage ...
+    //       => find a better way to get full set of search parameters
+    const filters = yield select((state) => state.ui.searchFilters);
+    const params = filtersToParams(filters);
+    const { data } = yield call(bioimages.fetchSearch, params);
     yield put(fetchSearchDoneAction(data));
   } catch (error) {
     yield put(fetchSearchErrorAction(error.message));
   }
 }
 
-function* fetchFacetsSaga(action) {
+function* fetchFacetsSaga() {
   try {
-    const { data } = yield call(bioimages.fetchFacets, action.payload);
+    // TODO: state may not be accurate at this stage ...
+    //       => find a better way to get full set of search parameters
+    const filters = yield select((state) => state.ui.searchFilters);
+    const params = filtersToParams(filters);
+    const { data } = yield call(bioimages.fetchFacets, params);
     yield put(fetchFacetsDoneAction(data));
   } catch (error) {
     yield put(fetchSearchErrorAction(error.message));
@@ -38,5 +87,8 @@ function* watchFetchSearchSaga() {
 }
 
 export function* rootSaga() {
+  // TODO: we probably want to run both sagas always together ....
+  //       => handle double call here instead of when invoking actions
+  //          makes it also easier to use the same filters / params and call the filtersToParams only once
   yield all([watchFetchSearchSaga(), watchFetchFacetsSaga()]);
 }

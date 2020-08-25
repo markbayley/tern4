@@ -8,8 +8,7 @@ import ImageSearchEngine from "./bio-image-search/ImageSearchEngine";
 import BioMapEngine from "./bio-image-map/BioMapEngine";
 import SearchEngine from "./bio-search/SearchEngine";
 import FilterHeader from "./bio-image-search/FilterHeader";
-// import { fetchSearchAction, getSelectedFilter } from "../store/reducer";
-import { fetchSearchAction, setSearchModeAction } from "../store/reducer";
+import { fetchSearchAction, fetchFacetsAction, setSearchModeAction } from "../store/reducer";
 import LeftSideBar from "../animations/LeftSideBar";
 import MobileSidebar from "./test/MobileSidebar";
 
@@ -35,13 +34,11 @@ const BioImagesEngine = () => {
   const dispatch = useDispatch();
   const searchMode = useSelector((state) => state.ui.searchResults.searchMode);
 
-  // TODO: move these two below somewhere else, or look at url params?
-  // TODO: this triggers a re-render - this component does not depend on selectedFilter
-  const selectedFilter = useSelector((state) => state.search.selectedFilter);
-  // TODO Look at this life cycle again and improve if required
+  // trigger initial search to populate facets results
   useEffect(() => {
-    dispatch(fetchSearchAction(selectedFilter));
-  }, [dispatch, selectedFilter]);
+    dispatch(fetchSearchAction());
+    dispatch(fetchFacetsAction());
+  }, [dispatch]);
 
   return (
     <>
