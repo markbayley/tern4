@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Col, Row, Button } from "react-bootstrap";
 import SearchBar from "./searchbar/SearchBar";
-import DateRange from "./bio-image-search/DateRange";
 import Favourite from "./bio-favourites/Favourite";
 import ImageSearchEngine from "./bio-image-search/ImageSearchEngine";
 import BioMapEngine from "./bio-image-map/BioMapEngine";
@@ -50,7 +49,6 @@ const BioImagesEngine = () => {
         <Col xs="auto" className="filter-bar">
           <FilterHeader />
           <ImageSearchEngine />
-          <DateRange />
           <MobileSidebar />
           <Favourite />
         </Col>

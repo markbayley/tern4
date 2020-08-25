@@ -78,6 +78,10 @@ const initialUiState = {
     plot: [],
     site_visit_id: [],
     image_type: [],
+    date_range: {
+      start: null,
+      end: null,
+    },
   },
 };
 

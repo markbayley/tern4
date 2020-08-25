@@ -44,6 +44,14 @@ function filtersToParams(filters) {
           params[key] = value.map((item) => item.value).join(",");
         }
       }
+    } else if (key === "date_range") {
+      // start and end date query params
+      if (value.start) {
+        params.date_from = value.start.format("YYYY-MM-DD");
+      }
+      if (value.end) {
+        params.date_to = value.end.format("YYYY-MM-DD");
+      }
     } else {
       // just one value
       params[key] = value;

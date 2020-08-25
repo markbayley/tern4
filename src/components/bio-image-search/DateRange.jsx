@@ -1,42 +1,25 @@
 /* eslint import/no-unassigned-import: "off" */
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "react-dates/initialize";
 import { DateRangePicker } from "react-dates";
+import { updateFilterAction, fetchFacetsAction, fetchSearchAction } from "../../store/reducer";
 import "react-dates/lib/css/_datepicker.css";
 // import moment from "moment";
-import { selectedFilterAction } from "../../store/reducer";
 
 const DateRange = () => {
   const dispatch = useDispatch();
-  const [dateRange, setDateRange] = useState({
-    start: null,
-    end: null,
-  });
+  const { start, end } = useSelector((state) => state.ui.searchFilters.date_range);
+
   const [focus, setFocus] = useState(null);
 
-  const { start, end } = dateRange;
-
   const handleOnDateChange = ({ startDate, endDate }) => {
-    if (startDate) {
-      const sRange = { ...dateRange, ...{ start: startDate } };
-      setDateRange(sRange);
-    }
-    if (endDate) {
-      const sRange = { ...dateRange, ...{ end: endDate } };
-      setDateRange(sRange);
-    }
+    dispatch(updateFilterAction({ date_range: { start: startDate, end: endDate } }));
+    // update facets
+    dispatch(fetchFacetsAction());
+    // trigger search
+    dispatch(fetchSearchAction());
   };
-
-  useEffect(() => {
-    if (dateRange.start && dateRange.end) {
-      // Note: start and end are Moment types, so need to convert for API
-      const dateFrom = dateRange.start.format("YYYY-MM-DD");
-      const dateTo = dateRange.end.format("YYYY-MM-DD");
-      const dateRangeSearch = { date_from: dateFrom, date_to: dateTo };
-      dispatch(selectedFilterAction(dateRangeSearch));
-    }
-  }, [dateRange, dispatch]);
 
   return (
     <>
