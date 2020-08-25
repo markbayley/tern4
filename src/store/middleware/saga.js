@@ -89,6 +89,7 @@ function* watchFetchSearchSaga() {
 export function* rootSaga() {
   // TODO: we probably want to run both sagas always together ....
   //       => handle double call here instead of when invoking actions
-  //          makes it also easier to use the same filters / params and call the filtersToParams only once
+  //          makes it also easier to use the same filters / params and
+  //          call the filtersToParams only once
   yield all([watchFetchSearchSaga(), watchFetchFacetsSaga()]);
 }
