@@ -51,6 +51,7 @@ const SearchEngine = ({ embed }) => {
             embed={embed}
           />
         ))}
+
       </Row>
       <Row className="pagination-row">
         <Pagination className="pagination">
@@ -66,22 +67,24 @@ const SearchEngine = ({ embed }) => {
             First
           </Pagination.First>
           <Pagination.Prev onClick={prevPage}>Previous</Pagination.Prev>
-          {pagination.map((page) => {
-            if (!page.ellipsis) {
-              return (
-                <div key={page.id} className="pagelink">
-                  <Pagination.Item
-                    key={page.id}
-                    active={!!page.current}
-                    onClick={(e) => changePage(page.id, e)}
-                  >
-                    {page.id}
-                  </Pagination.Item>
-                </div>
-              );
-            }
-            return <Pagination.Ellipsis key={page.id} />;
-          })}
+          <div className="mobile-pagination">
+            {pagination.map((page) => {
+              if (!page.ellipsis) {
+                return (
+                  <div key={page.id} className="pagelink">
+                    <Pagination.Item
+                      key={page.id}
+                      active={!!page.current}
+                      onClick={(e) => changePage(page.id, e)}
+                    >
+                      {page.id}
+                    </Pagination.Item>
+                  </div>
+                );
+              }
+              return <Pagination.Ellipsis key={page.id} />;
+            })}
+          </div>
           <Pagination.Next onClick={nextPage}>Next</Pagination.Next>
           <Pagination.Last onClick={(e) => changePage(pages, e)}>
             Last

@@ -9,7 +9,7 @@ import SearchEngine from "./bio-search/SearchEngine";
 import FilterHeader from "./bio-image-search/FilterHeader";
 import { fetchSearchAction, fetchFacetsAction, setSearchModeAction } from "../store/reducer";
 import LeftSideBar from "../animations/LeftSideBar";
-import MobileSidebar from "./test/MobileSidebar";
+// import MobileSidebar from "./test/MobileSidebar";
 
 /* Map Image Toggle */
 function Toggle() {
@@ -17,7 +17,7 @@ function Toggle() {
 
   return (
     <>
-      <div className="toggle">
+      <div className="main-toggle">
         <Button variant="round" onClick={() => dispatch(setSearchModeAction("Map"))}>
           Map
         </Button>
@@ -49,7 +49,7 @@ const BioImagesEngine = () => {
         <Col xs="auto" className="filter-bar">
           <FilterHeader />
           <ImageSearchEngine />
-          <MobileSidebar />
+          {/* <MobileSidebar /> */}
           <Favourite />
         </Col>
         <Toggle />

@@ -546,19 +546,20 @@ a.search-link.addlinks {
 }
 
 
-.toggle {
-  z-index: 100 !important;
-}
+
 /* Testing */
 .bio-facets {
   margin: 20px 10px; 
   color: #065f65;
 }
 
+
+
 @media (max-width: 1520px) {
   .toggle {
-     z-index: 100;
+   
   }
+
 }
 @media (max-width: 998px) {
   .biologo {
@@ -579,41 +580,4 @@ a.search-link.addlinks {
 
 
 
-
-.switch {
-  background-color: lightgray;
-  border: 0;
-  border-radius: 50px;
-  cursor: pointer;
-  height: 10px;
-  position: fixed;
-  top: 10;
-  width: 20px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-.switch:hover { background-color: lightgray; }
-.switch:focus,
-.switch:active { outline: none; }
-.switch::-moz-focus-inner { border: 0; }
-
-.pin {
-  background-color: white;
-  border-radius: 98px;
-  height: 29px;
-  left: 4px;
-  position: absolute;
-  top: 3px;
-  width: 29px;
-  transition: left ease .5s;
-}
-
-button.on {
-  background-color: green;
-}
-
-button.on .pin {
-  left: 98px;
-}
 

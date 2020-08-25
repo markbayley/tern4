@@ -25,3 +25,23 @@
        text-transform: capitalize;
     }
   }
+
+  .main-toggle {
+    position: absolute;
+    left: 25%;
+    bottom: 60px;
+    z-index: 8 !important;
+  }
+
+  @media (max-width: 1199px) {
+    .main-toggle {
+      left: 40% !important;
+      bottom: 50px;
+    }
+  }
+
+  @media (max-width: 899px) {
+    .main-toggle {
+      display: none;
+    }
+  }
