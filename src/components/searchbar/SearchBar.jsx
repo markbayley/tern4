@@ -83,11 +83,11 @@ function SearchBar() {
 
         {/* Login Buttons */}
         <div className="login">
-          <Link href={CONFIG.LOGIN_URL}>
+          <a href={CONFIG.LOGIN_URL}>
             {" "}
             <LoginButton />
             {" "}
-          </Link>
+          </a>
         </div>
       </Container>
       {/* </Navbar.Collapse> */}
