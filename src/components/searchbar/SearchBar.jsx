@@ -32,7 +32,7 @@ function SearchBar() {
   const handleSubmit = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    dispatch(fetchSearchAction);
+    dispatch(fetchSearchAction());
   };
 
   return (
