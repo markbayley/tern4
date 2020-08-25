@@ -1,6 +1,6 @@
 // import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { paginationAction } from "../../store/reducer";
+import { updateFilterAction, fetchSearchAction } from "../../store/reducer";
 
 const BioResultPagination = ({ itemsPerPage, startFrom, totalImages }) => {
   const perPage = itemsPerPage || 10;
@@ -34,21 +34,28 @@ const BioResultPagination = ({ itemsPerPage, startFrom, totalImages }) => {
   const changePage = (page, e) => {
     e.preventDefault();
     if (page !== currentPage) {
-      dispatch(paginationAction({ page_num: page }));
+      dispatch(updateFilterAction({ pagination: { page_size: itemsPerPage, page_num: page } }));
+      dispatch(fetchSearchAction());
     }
   };
 
   const goToPrevPage = (e) => {
     e.preventDefault();
     if (currentPage !== 1) {
-      dispatch(paginationAction({ page_num: currentPage - 1 }));
+      dispatch(updateFilterAction(
+        { pagination: { page_size: itemsPerPage, page_num: currentPage - 1 } },
+      ));
+      dispatch(fetchSearchAction());
     }
   };
 
   const goToNextPage = (e) => {
     e.preventDefault();
     if (currentPage !== pages) {
-      dispatch(paginationAction({ page_num: currentPage + 1 }));
+      dispatch(updateFilterAction(
+        { pagination: { page_size: itemsPerPage, page_num: currentPage + 1 } },
+      ));
+      dispatch(fetchSearchAction());
     }
   };
 

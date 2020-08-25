@@ -52,6 +52,13 @@ function filtersToParams(filters) {
       if (value.end) {
         params.date_to = value.end.format("YYYY-MM-DD");
       }
+    } else if (key === "pagination") {
+      if (value.page_size) {
+        params.page_size = value.page_size;
+      }
+      if (value.page_num) {
+        params.page_num = value.page_num;
+      }
     } else {
       // just one value
       params[key] = value;

@@ -4,16 +4,14 @@ import { Row, Pagination, DropdownButton, Dropdown } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import SearchResult from "./SearchResult";
 import BioResultPagination from "./BioResultPagination";
-import {
-  paginationPageSizeAction,
-} from "../../store/reducer";
+import { updateFilterAction, fetchSearchAction } from "../../store/reducer";
 import "./SearchResult.scss";
 import NoResults from "./NoResults";
 
 const SearchEngine = ({ embed }) => {
   const data = useSelector((state) => state.search.hits);
-  const totalImages = useSelector((state) => state.search.totalDocuments);
-  const pageScroll = useSelector((state) => state.search.pagination);
+  const totalDocuments = useSelector((state) => state.search.totalDocuments);
+  const { page_size, page_num } = useSelector((state) => state.ui.searchFilters.pagination);
   const dispatch = useDispatch();
 
   // if (loading) {
@@ -24,9 +22,6 @@ const SearchEngine = ({ embed }) => {
   //   );
   // }
 
-  const itemsPerPage = pageScroll["page_size"];
-  const startFrom = pageScroll["page_num"];
-
   const {
     pagination,
     pages,
@@ -34,14 +29,15 @@ const SearchEngine = ({ embed }) => {
     nextPage,
     changePage,
   } = BioResultPagination({
-    itemsPerPage,
-    data,
-    startFrom,
-    totalImages,
+    itemsPerPage: page_size,
+    startFrom: page_num,
+    totalImages: totalDocuments,
   });
 
   const handlePageSizeChange = (value) => {
-    dispatch(paginationPageSizeAction({ page_size: value }));
+    dispatch(updateFilterAction({ pagination: { page_size: value, page_num } }));
+    // trigger search
+    dispatch(fetchSearchAction());
   };
 
   const ShowPagination = () => (
@@ -59,7 +55,7 @@ const SearchEngine = ({ embed }) => {
       <Row className="pagination-row">
         <Pagination className="pagination">
           <div>
-            <DropdownButton id="dropdown-basic-button" title={`${itemsPerPage} per page`} variant="pageitems" className="pageitems">
+            <DropdownButton id="dropdown-basic-button" title={`${page_size} per page`} variant="pageitems" className="pageitems">
               <Dropdown.Item onClick={() => handlePageSizeChange(18)}>18 per page</Dropdown.Item>
               <Dropdown.Item onClick={() => handlePageSizeChange(36)}>36 per page</Dropdown.Item>
               <Dropdown.Item onClick={() => handlePageSizeChange(54)}>54 per page</Dropdown.Item>
@@ -95,7 +91,7 @@ const SearchEngine = ({ embed }) => {
     </div>
   );
 
-  return totalImages === 0 ? <NoResults /> : <ShowPagination />;
+  return totalDocuments === 0 ? <NoResults /> : <ShowPagination />;
 };
 
 SearchEngine.propTypes = {
