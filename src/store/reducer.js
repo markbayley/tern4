@@ -61,17 +61,25 @@ const searchReducer = createReducer(initialSearchState, {
 });
 
 export const setSearchModeAction = createAction("SET_SEARCH_MODE");
+export const updateFilterAction = createAction("UPDATE_SEARCH_FILTER");
 
 // UI state reducers
 const initialUiState = {
   searchResults: {
     searchMode: "Map",
   },
+  searchFilters: {
+    search_string: "",
+  },
 };
 
 const uiReducer = createReducer(initialUiState, {
   [setSearchModeAction]: (state, action) => {
     state.searchResults.searchMode = action.payload;
+  },
+  // updateFilterAction leaves filters not mentioned in payload unchanged
+  [updateFilterAction]: (state, action) => {
+    Object.assign(state.searchFilters, action.payload);
   },
 });
 

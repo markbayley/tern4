@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Container,
   Button,
+  Form,
   FormControl,
   Col,
   InputGroup,
@@ -9,24 +10,29 @@ import {
   Image,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, connect } from "react-redux";
 import LoginButton from "../buttons/LoginButton";
-import { selectedFilterAction } from "../../store/reducer";
+import { updateFilterAction, fetchSearchAction } from "../../store/reducer";
 import { CONFIG } from "../../config";
+
+// Controlled Input field for search_string
+function mapStateToProps(state) {
+  return { value: state.ui.searchFilters.search_string };
+}
+const SearchStringField = connect(mapStateToProps, {})(FormControl);
 
 /* Connects to another test API unsplash, not the TERN API as yet, need to change over */
 function SearchBar() {
   const dispatch = useDispatch();
-  const [freeText, setFreeText] = useState(null);
 
   const handleChange = (event) => {
-    // setPhoto(event.target.value);
-    setFreeText(event.target.value);
+    dispatch(updateFilterAction({ search_string: event.target.value }));
   };
 
-  const handleSubmit = () => {
-    const searchTerm = { search_string: `${freeText}*` };
-    dispatch(selectedFilterAction(searchTerm));
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    dispatch(fetchSearchAction);
   };
 
   return (
@@ -53,32 +59,34 @@ function SearchBar() {
         </h3>
 
         {/* Search Input */}
-        <InputGroup
-          inline="true"
-          className="searchbar"
-        >
-          <Image
-            fluid
-            src="/img/icons/search-bioimages-icon.svg"
-            alt="bioimages search icon"
-            className="search-icon"
-          />
-          <FormControl
-            style={{ color: "#00565D" }}
-            onChange={handleChange}
-            id="place"
-            type="text"
-            placeholder="Search images by site or image type"
-            className="search-form"
-            aria-label="term"
-          />
-          <Button
-            className="searchbutton"
-            onClick={handleSubmit}
-            variant="outline"
-            type="submit"
-          />
-        </InputGroup>
+        <Form onSubmit={handleSubmit}>
+          <InputGroup
+            inline="true"
+            className="searchbar"
+          >
+            <Image
+              fluid
+              src="/img/icons/search-bioimages-icon.svg"
+              alt="bioimages search icon"
+              className="search-icon"
+            />
+            <SearchStringField
+              style={{ color: "#00565D" }}
+              onChange={handleChange}
+              onBlur={handleSubmit}
+              id="place"
+              type="text"
+              placeholder="Search images by site or image type"
+              className="search-form"
+              aria-label="term"
+            />
+            <Button
+              className="searchbutton"
+              variant="outline"
+              type="submit"
+            />
+          </InputGroup>
+        </Form>
         {/* End of Search Input */}
 
         {/* Login Buttons */}
