@@ -31,8 +31,9 @@ const SelectFacet = ({ facet, ...props }) => {
     }
     const option = {
       // TODO: can we have separate label and count, and use a custom component to render option?
-      label: `${label}(${count})`,
+      label,
       value,
+      count,
     };
     if (selectedValues.has(value)) {
       cur_value.push(option);
@@ -53,7 +54,6 @@ const SelectFacet = ({ facet, ...props }) => {
     dispatch(fetchSearchAction());
   };
 
-  // items: [{label: "", value: ""}, ]
   return (
     <Select
       className="mb-4"
@@ -64,6 +64,7 @@ const SelectFacet = ({ facet, ...props }) => {
       autoFocus
       onChange={handleChange}
       styles={facetColourStyles}
+      getOptionLabel={(option) => `${option.label} (${option.count})`}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     />

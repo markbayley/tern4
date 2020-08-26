@@ -33,11 +33,12 @@ const ImageTypeSelectFacet = ({ facet, ...props }) => {
         const subCount = sub_type.doc_count;
         const subValue = `ancillary.${sub_type.key.replace(/%20/gi, " ")}`;
         const subLabel = `${label}[${startCase(
-          sub_type.key.replace(/%20/gi, " "),
+          sub_type.key.replace(/%20/gi, " ")
         )}]`;
         const option = {
-          label: `${subLabel}(${subCount})`,
+          label: subLabel,
           value: subValue,
+          count: subCount,
         };
         if (selectedValues.has(subValue)) {
           cur_value.push(option);
@@ -47,8 +48,9 @@ const ImageTypeSelectFacet = ({ facet, ...props }) => {
     }
     const option = {
       // TODO: can we have separate label and count, and use a custom component to render option?
-      label: `${label}(${count})`,
+      label,
       value,
+      count,
     };
     if (selectedValues.has(value)) {
       cur_value.push(option);
@@ -81,6 +83,7 @@ const ImageTypeSelectFacet = ({ facet, ...props }) => {
       autoFocus
       onChange={handleChange}
       styles={facetColourStyles}
+      getOptionLabel={option => `${option.label}   (${option.count})`}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     />
