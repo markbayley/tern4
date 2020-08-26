@@ -1,19 +1,19 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { Button } from "reactstrap";
 
 const FilterHeader = () => (
   <h5 className="filter-header">
-    <Button variant="filter">
+    <Button color="filter">
       <i className="fa fa-filter" />
       {" "}
       Filter
     </Button>
-    <Button variant="filter">
+    <Button color="filter">
       <i className="fa fa-star" />
       {" "}
       Favourites
     </Button>
-    <Button variant="filter">
+    <Button color="filter">
       <i className="fa fa-check-square" />
       {" "}
       Saved

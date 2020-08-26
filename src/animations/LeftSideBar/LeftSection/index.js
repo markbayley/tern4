@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
-import { Button } from "react-bootstrap";
+import { Button } from "reactstrap";
 import BurgerButton from "../BurgerButton";
 import { LeftSideBarContext } from "../LeftSideBarContext";
 import "./style.scss";
@@ -31,14 +31,14 @@ const LeftSection = ({ searchmode }) => {
             searchmode={searchmode}
             // onClick={() => setMySearch(searchmode === 'Map')}
             style={{ width: "100%" }}
-            variant="flat"
+            color="flat"
           >
             <img src="img/map1.png" width="100%" alt="map" />
             Click the map to view
           </Button>
           <Button
             style={{ width: "100%" }}
-            variant="flat"
+            color="flat"
           >
             <BioMapEngine embed />
 

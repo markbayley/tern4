@@ -1,35 +1,36 @@
 import React from "react";
-import { Breadcrumb } from "reactstrap";
 import {
-  Nav, Row, Col, Form,
-} from "react-bootstrap";
+  Breadcrumb, NavItem, NavLink, Row, Col,
+  Form, FormGroup, Input, Label,
+} from "reactstrap";
 
 const BreadCrumb = () => (
   <Breadcrumb>
     <Row className="breadcrumb-row" activekey="/home">
-      <Nav.Item className="nav-item">
-        <Nav.Link href="/home">
+      <NavItem className="nav-item" tag="div">
+        <NavLink href="/home">
           Access Policy
-        </Nav.Link>
-      </Nav.Item>
-      <Nav.Item className="nav-item">
-        <Nav.Link eventKey="link-1">
+        </NavLink>
+      </NavItem>
+      <NavItem className="nav-item" tag="div">
+        <NavLink>
           Data Licensing
-        </Nav.Link>
-      </Nav.Item>
-      <Nav.Item className="nav-item">
-        <Nav.Link eventKey="link-2">
+        </NavLink>
+      </NavItem>
+      <NavItem className="nav-item" tag="div">
+        <NavLink>
           Copyright
-        </Nav.Link>
-      </Nav.Item>
+        </NavLink>
+      </NavItem>
     </Row>
-    {/* <BreadcrumbItem>Site</BreadcrumbItem>
-          <BreadcrumbItem>Image Type</BreadcrumbItem>
-          <BreadcrumbItem>Plot</BreadcrumbItem>
-          <BreadcrumbItem active>Date</BreadcrumbItem> */}
     <Col className="select-all">
       <Form>
-        <Form.Check type="checkbox" inline label="Select All" />
+        <FormGroup check inline>
+          <Label check>
+            <Input type="checkbox" />
+            Select all
+          </Label>
+        </FormGroup>
       </Form>
     </Col>
   </Breadcrumb>

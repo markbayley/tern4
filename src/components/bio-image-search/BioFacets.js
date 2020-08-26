@@ -19,24 +19,26 @@ const colourStyles = {
     backgroundColor: "white",
     fontSize: "16px",
   }),
-  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+  option: (styles, {
+    data, isDisabled, isFocused, isSelected,
+  }) => {
     const color = "#ED694B";
     return {
       ...styles,
       backgroundColor: isDisabled
         ? null
         : isSelected
-        ? data.color
-        : isFocused
-        ? "B3D4C9"
-        : null,
+          ? data.color
+          : isFocused
+            ? "B3D4C9"
+            : null,
       color: isDisabled
         ? "#ED694B"
         : isSelected
-        ? chroma.contrast(color, "#ED694B") > 2
-          ? "#ED694B"
-          : "#ED694B"
-        : data.color,
+          ? chroma.contrast(color, "#ED694B") > 2
+            ? "#ED694B"
+            : "#ED694B"
+          : data.color,
       fontSize: isFocused ? "16px" : isSelected ? "20px" : data.color,
       cursor: isDisabled ? "not-allowed" : "default",
 
@@ -144,7 +146,7 @@ const ImageTypeFacet = ({ facet, ...props }) => {
         const subCount = sub_type.doc_count;
         const subValue = `ancillary.${sub_type.key.replace(/%20/gi, " ")}`;
         const subLabel = `${label}[${startCase(
-          sub_type.key.replace(/%20/gi, " ")
+          sub_type.key.replace(/%20/gi, " "),
         )}]`;
         const option = {
           label: `${subLabel}(${subCount})`,

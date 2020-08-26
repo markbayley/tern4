@@ -1,5 +1,7 @@
-import React from "react";
-import { Navbar, NavItem, Nav } from "react-bootstrap";
+import React, { useState } from "react";
+import {
+  Navbar, NavItem, Nav, NavbarToggler, Collapse,
+} from "reactstrap";
 import {
   Switch, Route, Link,
 } from "react-router-dom";
@@ -9,29 +11,32 @@ import CoESRADropdown from "../dropdowns/CoESRADropdown";
 import DataVisualiserDropdown from "../dropdowns/DataVisualiserDropdown";
 
 export default function TopBar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
+
   return (
     <div>
       <div className="above-header">
         <div className="container">
           <div className="above-header-section-wrap d-flex">
-            <Navbar expand="md" style={{ padding: "0%" }}>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-                <Nav navbar className="ml-auto">
-                  <NavItem>
+            <Navbar expand="md" light style={{ padding: "0%" }}>
+              <NavbarToggler onClick={toggle} />
+              <Collapse navbar isOpen={isOpen}>
+                <Nav navbar className="ml-auto" tag="div">
+                  <NavItem tag="div">
                     <TERNDataDropdown />
                   </NavItem>
-                  <NavItem>
+                  <NavItem tag="div">
                     <DataVisualiserDropdown />
                   </NavItem>
-                  <NavItem>
+                  <NavItem tag="div">
                     <CoESRADropdown />
                   </NavItem>
-                  <NavItem>
+                  <NavItem tag="div">
                     <CommunityDropdown />
                   </NavItem>
                 </Nav>
-              </Navbar.Collapse>
+              </Collapse>
             </Navbar>
 
             <div className="above-header-section above-header-section-1" style={{ marginLeft: "15px", maxWidth: "100px" }}>

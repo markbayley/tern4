@@ -1,6 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Row, Pagination, DropdownButton, Dropdown } from "react-bootstrap";
+import {
+  Row,
+  UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem,
+  Pagination, PaginationItem, PaginationLink,
+} from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import SearchResult from "./SearchResult";
 import BioResultPagination from "./BioResultPagination";
@@ -56,39 +60,56 @@ const SearchEngine = ({ embed }) => {
       <Row className="pagination-row">
         <Pagination className="pagination">
           <div>
-            <DropdownButton id="dropdown-basic-button" title={`${page_size} per page`} variant="pageitems" className="pageitems">
-              <Dropdown.Item onClick={() => handlePageSizeChange(18)}>18 per page</Dropdown.Item>
-              <Dropdown.Item onClick={() => handlePageSizeChange(36)}>36 per page</Dropdown.Item>
-              <Dropdown.Item onClick={() => handlePageSizeChange(54)}>54 per page</Dropdown.Item>
-              <Dropdown.Item onClick={() => handlePageSizeChange(102)}>102 per page</Dropdown.Item>
-            </DropdownButton>
+            <UncontrolledDropdown className="pageitems">
+              <DropdownToggle caret color="pageitems" id="dropdown-basic-button" className="pageitems">
+                {`${page_size} per page`}
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem onClick={() => handlePageSizeChange(18)}>18 per page</DropdownItem>
+                <DropdownItem onClick={() => handlePageSizeChange(36)}>36 per page</DropdownItem>
+                <DropdownItem onClick={() => handlePageSizeChange(54)}>54 per page</DropdownItem>
+                <DropdownItem onClick={() => handlePageSizeChange(102)}>102 per page</DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
           </div>
-          <Pagination.First onClick={(e) => changePage(1, e)}>
-            First
-          </Pagination.First>
-          <Pagination.Prev onClick={prevPage}>Previous</Pagination.Prev>
+          <PaginationItem onClick={(e) => changePage(1, e)}>
+            <PaginationLink first>
+              First
+            </PaginationLink>
+          </PaginationItem>
+          <PaginationItem onClick={prevPage}>
+            <PaginationLink previous>Previous</PaginationLink>
+          </PaginationItem>
           <div className="mobile-pagination">
             {pagination.map((page) => {
               if (!page.ellipsis) {
                 return (
                   <div key={page.id} className="pagelink">
-                    <Pagination.Item
+                    <PaginationItem
                       key={page.id}
                       active={!!page.current}
                       onClick={(e) => changePage(page.id, e)}
                     >
-                      {page.id}
-                    </Pagination.Item>
+                      <PaginationLink>
+                        {page.id}
+                      </PaginationLink>
+                    </PaginationItem>
                   </div>
                 );
               }
-              return <Pagination.Ellipsis key={page.id} />;
+              return (
+                <PaginationItem key={page.id}>
+                  <PaginationLink>...</PaginationLink>
+                </PaginationItem>
+              );
             })}
           </div>
-          <Pagination.Next onClick={nextPage}>Next</Pagination.Next>
-          <Pagination.Last onClick={(e) => changePage(pages, e)}>
-            Last
-          </Pagination.Last>
+          <PaginationItem onClick={nextPage}>
+            <PaginationLink next>Next</PaginationLink>
+          </PaginationItem>
+          <PaginationItem onClick={(e) => changePage(pages, e)}>
+            <PaginationLink last>Last</PaginationLink>
+          </PaginationItem>
         </Pagination>
       </Row>
     </div>

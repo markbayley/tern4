@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Col, Row, Button } from "react-bootstrap";
+import { Col, Row, Button } from "reactstrap";
 import SearchBar from "./searchbar/SearchBar";
 import Favourite from "./bio-favourites/Favourite";
 import ImageSearchEngine from "./bio-image-search/ImageSearchEngine";
@@ -16,16 +16,14 @@ function Toggle() {
   const dispatch = useDispatch();
 
   return (
-    <>
-      <div className="main-toggle">
-        <Button variant="round" onClick={() => dispatch(setSearchModeAction("Map"))}>
-          Map
-        </Button>
-        <Button variant="round" onClick={() => dispatch(setSearchModeAction("Images"))}>
-          Image
-        </Button>
-      </div>
-    </>
+    <div className="main-toggle">
+      <Button color="round" onClick={() => dispatch(setSearchModeAction("Map"))}>
+        Map
+      </Button>
+      <Button color="round" onClick={() => dispatch(setSearchModeAction("Images"))}>
+        Image
+      </Button>
+    </div>
   );
 }
 
