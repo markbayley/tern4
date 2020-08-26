@@ -7,7 +7,7 @@ import { updateFilterAction, fetchFacetsAction, fetchSearchAction } from "../../
 import "react-dates/lib/css/_datepicker.css";
 // import moment from "moment";
 
-const DateRange = () => {
+const DateRangeFacet = () => {
   const dispatch = useDispatch();
   const { start, end } = useSelector((state) => state.ui.searchFilters.date_range);
 
@@ -68,4 +68,4 @@ const DateRange = () => {
   );
 };
 
-export default DateRange;
+export default DateRangeFacet;

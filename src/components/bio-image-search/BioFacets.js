@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import { startCase } from "lodash";
 import chroma from "chroma-js";
-import DateRange from "./DateRange";
+import DateRangeFacet from "./DateRangeFacet";
 import { fetchSearchAction, fetchFacetsAction, updateFilterAction } from "../../store/reducer";
 
 /* Sidebar Styles */
@@ -204,8 +204,8 @@ const BioFacets = () => (
     <SelectFacet facet="plot" placeholder="Select Plots" />
     <SelectFacet facet="site_visit_id" placeholder="Select Site Visit Ids" />
     <ImageTypeFacet facet="image_type" placeholder="Select Image Types" />
-    {/* TODO: should be named DateRangeFacet */}
-    <DateRange />
+    {/* TODO: [TERNDA-858] should be named DateRangeFacet */}
+    <DateRangeFacet />
   </div>
 );
 
