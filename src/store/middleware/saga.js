@@ -61,6 +61,7 @@ function filtersToParams(filters) {
       }
     } else {
       // just one value
+      // e.g. free text search (key=search_string)
       params[key] = value;
     }
   });
