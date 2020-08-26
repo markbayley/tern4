@@ -3,7 +3,7 @@ import DateRangeFacet from "./DateRangeFacet";
 import SelectFacet from "./SelectFacet";
 import ImageTypeSelectFacet from "./ImageTypeSelectFacet";
 
-const BioFacets = () => (
+const BioFacetsEngine = () => (
   <div>
     <SelectFacet facet="site_id" placeholder="Select Sites" />
     <SelectFacet facet="plot" placeholder="Select Plots" />
@@ -13,4 +13,4 @@ const BioFacets = () => (
   </div>
 );
 
-export default BioFacets;
+export default BioFacetsEngine;

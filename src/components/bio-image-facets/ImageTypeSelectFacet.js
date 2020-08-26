@@ -33,7 +33,7 @@ const ImageTypeSelectFacet = ({ facet, ...props }) => {
         const subCount = sub_type.doc_count;
         const subValue = `ancillary.${sub_type.key.replace(/%20/gi, " ")}`;
         const subLabel = `${label}[${startCase(
-          sub_type.key.replace(/%20/gi, " "),
+          sub_type.key.replace(/%20/gi, " ")
         )}]`;
         const option = {
           label: subLabel,
@@ -47,7 +47,6 @@ const ImageTypeSelectFacet = ({ facet, ...props }) => {
       });
     }
     const option = {
-      // TODO: can we have separate label and count, and use a custom component to render option?
       label,
       value,
       count,

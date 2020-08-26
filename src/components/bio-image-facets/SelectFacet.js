@@ -30,7 +30,6 @@ const SelectFacet = ({ facet, ...props }) => {
       label = item.hits.hits.hits[0]["_source"][facet].label;
     }
     const option = {
-      // TODO: can we have separate label and count, and use a custom component to render option?
       label,
       value,
       count,
