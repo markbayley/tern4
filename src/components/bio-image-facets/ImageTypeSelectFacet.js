@@ -31,6 +31,7 @@ const ImageTypeSelectFacet = ({ facet, ...props }) => {
     if (value === "ancillary") {
       return item["image_type_sub"].buckets.map((sub_type) => {
         const subCount = sub_type.doc_count;
+        // FIXME: [TERNDA-860] Data corruption needs to be fixed. Ancillary Samford camera trap has string like %/20. Wilma and Andrew need to look at backend data
         const subValue = `ancillary.${sub_type.key.replace(/%20/gi, " ")}`;
         const subLabel = `${label}[${startCase(
           sub_type.key.replace(/%20/gi, " ")
