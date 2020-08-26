@@ -11,7 +11,7 @@ import {
 } from "../../store/reducer";
 import { facetColourStyles } from "./facetColourStyles";
 
-const ImageTypeFacet = ({ facet, ...props }) => {
+const ImageTypeSelectFacet = ({ facet, ...props }) => {
   const dispatch = useDispatch();
 
   // currently selected facets
@@ -87,8 +87,8 @@ const ImageTypeFacet = ({ facet, ...props }) => {
   );
 };
 
-ImageTypeFacet.propTypes = {
+ImageTypeSelectFacet.propTypes = {
   facet: PropTypes.string.isRequired,
 };
 
-export default ImageTypeFacet;
+export default ImageTypeSelectFacet;
