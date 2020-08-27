@@ -61,6 +61,9 @@ function filtersToParams(filters) {
       if (value.page_num) {
         params.page_num = value.page_num;
       }
+    } else if (key === "sort") {
+      params.sort_order = value.sort_order;
+      params.sort_column = value.sort_column;
     } else {
       // just one value
       // e.g. free text search (key=search_string)
