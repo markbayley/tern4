@@ -17,8 +17,6 @@ const SimpleDateRangeFacet = () => {
   );
 
   const handleOnDateChange = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
     if (event.target.name === "start") {
       dispatch(
         updateFilterAction({

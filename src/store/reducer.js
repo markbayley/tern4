@@ -66,6 +66,10 @@ const initialUiState = {
       page_size: 32,
       page_num: 1,
     },
+    sort: {
+      sort_order: "asc",
+      sort_column: "file_created",
+    },
   },
 };
 
