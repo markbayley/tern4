@@ -1,9 +1,15 @@
+/* eslint no-alert: "off" */
 import React from "react";
 import PropTypes from "prop-types";
 import {
   Row,
-  UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem,
-  Pagination, PaginationItem, PaginationLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
 } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import SearchResult from "./SearchResult";
@@ -15,16 +21,13 @@ import NoResults from "./NoResults";
 const SearchEngine = ({ embed }) => {
   const data = useSelector((state) => state.search.hits);
   const totalDocuments = useSelector((state) => state.search.totalDocuments);
-  const { page_size, page_num } = useSelector((state) => state.ui.searchFilters.pagination);
+  const { page_size, page_num } = useSelector(
+    (state) => state.ui.searchFilters.pagination,
+  );
+  const { sort_order, sort_column } = useSelector(
+    (state) => state.ui.searchFilters.sort,
+  );
   const dispatch = useDispatch();
-
-  // if (loading) {
-  //   return (
-  //     <Spinner animation="border" role="status">
-  //       <span className="sr-only">Loading...</span>
-  //     </Spinner>
-  //   );
-  // }
 
   const {
     pagination,
@@ -39,9 +42,20 @@ const SearchEngine = ({ embed }) => {
   });
 
   const handlePageSizeChange = (value) => {
-    dispatch(updateFilterAction({ pagination: { page_size: value, page_num } }));
+    dispatch(
+      updateFilterAction({ pagination: { page_size: value, page_num } }),
+    );
     // trigger search
     dispatch(fetchSearchAction());
+  };
+
+  const handleSortBy = (value) => {
+    // TODO: Implement it
+    alert(`Not implemented yet!! ${value}`);
+  };
+  const handleSortOrder = (value) => {
+    // TODO: Implement it.
+    alert(`Not implemented yet!! ${value}`);
   };
 
   const ShowPagination = () => (
@@ -55,27 +69,92 @@ const SearchEngine = ({ embed }) => {
             embed={embed}
           />
         ))}
-
       </Row>
       <Row className="pagination-row">
         <Pagination className="pagination">
           <div>
             <UncontrolledDropdown className="pageitems">
-              <DropdownToggle caret color="pageitems" id="dropdown-basic-button" className="pageitems">
+              <DropdownToggle
+                caret
+                color="pageitems"
+                id="dropdown-basic-button"
+                className="pageitems"
+              >
+                {`Sort By:${sort_column}`}
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem onClick={() => handleSortBy("file_created")}>
+                  File Created
+                </DropdownItem>
+                <DropdownItem onClick={() => handleSortBy("image_type")}>
+                  Image Type
+                </DropdownItem>
+                <DropdownItem onClick={() => handleSortBy("site_id")}>
+                  Site Id
+                </DropdownItem>
+                <DropdownItem onClick={() => handleSortBy("plot")}>
+                  Plot Name
+                </DropdownItem>
+                <DropdownItem onClick={() => handleSortBy("site_visit_id")}>
+                  Site Visit Id
+                </DropdownItem>
+                <DropdownItem onClick={() => handleSortBy("camera_make")}>
+                  Camera Make
+                </DropdownItem>
+                <DropdownItem onClick={() => handleSortBy("camera_model")}>
+                  Camera Model
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          </div>
+          <div>
+            <UncontrolledDropdown className="pageitems">
+              <DropdownToggle
+                caret
+                color="pageitems"
+                id="dropdown-basic-button"
+                className="pageitems"
+              >
+                {`Sort Order:${sort_order}`}
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem onClick={() => handleSortOrder("asc")}>
+                  asc
+                </DropdownItem>
+                <DropdownItem onClick={() => handleSortOrder("desc")}>
+                  desc
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          </div>
+          <div>
+            <UncontrolledDropdown className="pageitems">
+              <DropdownToggle
+                caret
+                color="pageitems"
+                id="dropdown-basic-button"
+                className="pageitems"
+              >
                 {`${page_size} per page`}
               </DropdownToggle>
               <DropdownMenu>
-                <DropdownItem onClick={() => handlePageSizeChange(18)}>18 per page</DropdownItem>
-                <DropdownItem onClick={() => handlePageSizeChange(36)}>36 per page</DropdownItem>
-                <DropdownItem onClick={() => handlePageSizeChange(54)}>54 per page</DropdownItem>
-                <DropdownItem onClick={() => handlePageSizeChange(102)}>102 per page</DropdownItem>
+                <DropdownItem onClick={() => handlePageSizeChange(18)}>
+                  18 per page
+                </DropdownItem>
+                <DropdownItem onClick={() => handlePageSizeChange(36)}>
+                  36 per page
+                </DropdownItem>
+                <DropdownItem onClick={() => handlePageSizeChange(54)}>
+                  54 per page
+                </DropdownItem>
+                <DropdownItem onClick={() => handlePageSizeChange(102)}>
+                  102 per page
+                </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
           </div>
           <PaginationItem onClick={(e) => changePage(1, e)}>
-            <PaginationLink first>
-              First
-            </PaginationLink>
+            <PaginationLink first>First</PaginationLink>
           </PaginationItem>
           <PaginationItem onClick={prevPage}>
             <PaginationLink previous>Previous</PaginationLink>
@@ -90,9 +169,7 @@ const SearchEngine = ({ embed }) => {
                       active={!!page.current}
                       onClick={(e) => changePage(page.id, e)}
                     >
-                      <PaginationLink>
-                        {page.id}
-                      </PaginationLink>
+                      <PaginationLink>{page.id}</PaginationLink>
                     </PaginationItem>
                   </div>
                 );
