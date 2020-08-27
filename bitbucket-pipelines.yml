@@ -14,8 +14,9 @@ definitions:
         script: &build-test
           - *setenv
           - npm install
+          - npm run lint
           - npm run build
-          - CI=true npm test
+          # - CI=true npm test
         services:
           - docker
 
