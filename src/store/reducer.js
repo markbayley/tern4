@@ -27,7 +27,8 @@ const searchReducer = createReducer(initialSearchState, {
   [fetchSearchDoneAction]: (state, action) => {
     state.isLoadingSearch = false;
     const { hits, page_num, page_size } = action.payload;
-    if (hits) { // Null, Undefined, Empty, Whatever .... All Means No Results
+    if (hits) {
+      // Null, Undefined, Empty, Whatever .... All Means No Results
       state.hits = hits.hits;
       state.totalDocuments = hits.total.value;
       state.pagination = { page_size, page_num };
@@ -58,8 +59,8 @@ const initialUiState = {
     site_visit_id: [],
     image_type: [],
     date_range: {
-      start: null,
-      end: null,
+      start: "",
+      end: "",
     },
     pagination: {
       page_size: 32,

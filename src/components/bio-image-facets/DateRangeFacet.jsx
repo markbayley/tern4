@@ -1,9 +1,14 @@
 /* eslint import/no-unassigned-import: "off" */
+/* eslint import/no-unused-modules: "off" */
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "react-dates/initialize";
 import { DateRangePicker } from "react-dates";
-import { updateFilterAction, fetchFacetsAction, fetchSearchAction } from "../../store/reducer";
+import {
+  updateFilterAction,
+  fetchFacetsAction,
+  fetchSearchAction,
+} from "../../store/reducer";
 import "react-dates/lib/css/_datepicker.css";
 // import moment from "moment";
 
@@ -14,7 +19,9 @@ const DateRangeFacet = () => {
   const [focus, setFocus] = useState(null);
 
   const handleOnDateChange = ({ startDate, endDate }) => {
-    dispatch(updateFilterAction({ date_range: { start: startDate, end: endDate } }));
+    dispatch(
+      updateFilterAction({ date_range: { start: startDate, end: endDate } }),
+    );
     // update facets
     dispatch(fetchFacetsAction());
     // trigger search
