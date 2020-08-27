@@ -60,7 +60,7 @@ const SimpleDateRangeFacet = () => {
               value={start}
               min={start}
               max={end}
-              onChange={(e) => handleOnDateChange(e)}
+              onChange={handleOnDateChange}
             />
           </Col>
           <Col>
@@ -72,7 +72,7 @@ const SimpleDateRangeFacet = () => {
               value={end}
               min={start}
               max={end}
-              onChange={(e) => handleOnDateChange(e)}
+              onChange={handleOnDateChange}
             />
           </Col>
         </Row>
