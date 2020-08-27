@@ -11,7 +11,7 @@ definitions:
     - step: &build-test-step
         caches:
           - node
-        script: *build-test
+        script: &build-test
           - *setenv
           - npm install
           - npm run build
