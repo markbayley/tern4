@@ -63,12 +63,15 @@ const initialUiState = {
       end: "",
     },
     pagination: {
-      page_size: 32,
+      page_size: 10,
       page_num: 1,
     },
     sort: {
       sort_order: "asc",
-      sort_column: "file_created",
+      sort_column: {
+        column_name: "file_created",
+        column_label: "File Creation",
+      },
     },
   },
 };

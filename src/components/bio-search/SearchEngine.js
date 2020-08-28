@@ -17,6 +17,7 @@ import BioResultPagination from "./BioResultPagination";
 import { updateFilterAction, fetchSearchAction } from "../../store/reducer";
 import "./SearchResult.scss";
 import NoResults from "./NoResults";
+import { bioSort } from "./bioSort";
 
 const SearchEngine = ({ embed }) => {
   const data = useSelector((state) => state.search.hits);
@@ -80,30 +81,16 @@ const SearchEngine = ({ embed }) => {
                 id="dropdown-basic-button"
                 className="pageitems"
               >
-                {`Sort By:${sort_column}`}
+                {sort_column.column_label}
               </DropdownToggle>
               <DropdownMenu>
-                <DropdownItem onClick={() => handleSortBy("file_created")}>
-                  File Created
-                </DropdownItem>
-                <DropdownItem onClick={() => handleSortBy("image_type")}>
-                  Image Type
-                </DropdownItem>
-                <DropdownItem onClick={() => handleSortBy("site_id")}>
-                  Site Id
-                </DropdownItem>
-                <DropdownItem onClick={() => handleSortBy("plot")}>
-                  Plot Name
-                </DropdownItem>
-                <DropdownItem onClick={() => handleSortBy("site_visit_id")}>
-                  Site Visit Id
-                </DropdownItem>
-                <DropdownItem onClick={() => handleSortBy("camera_make")}>
-                  Camera Make
-                </DropdownItem>
-                <DropdownItem onClick={() => handleSortBy("camera_model")}>
-                  Camera Model
-                </DropdownItem>
+                {bioSort.sort_columns.map((column) => (
+                  <DropdownItem
+                    onClick={() => handleSortBy(column.column_name)}
+                  >
+                    {column.column_label}
+                  </DropdownItem>
+                ))}
               </DropdownMenu>
             </UncontrolledDropdown>
           </div>
@@ -115,15 +102,14 @@ const SearchEngine = ({ embed }) => {
                 id="dropdown-basic-button"
                 className="pageitems"
               >
-                {`Sort Order:${sort_order}`}
+                {sort_order}
               </DropdownToggle>
               <DropdownMenu>
-                <DropdownItem onClick={() => handleSortOrder("asc")}>
-                  asc
-                </DropdownItem>
-                <DropdownItem onClick={() => handleSortOrder("desc")}>
-                  desc
-                </DropdownItem>
+                {bioSort.sort_order.map((sort) => (
+                  <DropdownItem onClick={() => handleSortOrder(sort)}>
+                    {sort}
+                  </DropdownItem>
+                ))}
               </DropdownMenu>
             </UncontrolledDropdown>
           </div>
@@ -138,17 +124,17 @@ const SearchEngine = ({ embed }) => {
                 {`${page_size} per page`}
               </DropdownToggle>
               <DropdownMenu>
-                <DropdownItem onClick={() => handlePageSizeChange(18)}>
-                  18 per page
+                <DropdownItem onClick={() => handlePageSizeChange(10)}>
+                  10 per page
                 </DropdownItem>
-                <DropdownItem onClick={() => handlePageSizeChange(36)}>
-                  36 per page
+                <DropdownItem onClick={() => handlePageSizeChange(25)}>
+                  25 per page
                 </DropdownItem>
-                <DropdownItem onClick={() => handlePageSizeChange(54)}>
-                  54 per page
+                <DropdownItem onClick={() => handlePageSizeChange(50)}>
+                  50 per page
                 </DropdownItem>
-                <DropdownItem onClick={() => handlePageSizeChange(102)}>
-                  102 per page
+                <DropdownItem onClick={() => handlePageSizeChange(100)}>
+                  100 per page
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>

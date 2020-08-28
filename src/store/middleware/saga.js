@@ -63,7 +63,7 @@ function filtersToParams(filters) {
       }
     } else if (key === "sort") {
       params.sort_order = value.sort_order;
-      params.sort_column = value.sort_column;
+      params.sort_column = value.sort_column.column_name;
     } else {
       // just one value
       // e.g. free text search (key=search_string)
