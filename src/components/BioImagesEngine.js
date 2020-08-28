@@ -7,7 +7,11 @@ import ImageSearchEngine from "./bio-image-search/ImageSearchEngine";
 import BioMapEngine from "./bio-image-map/BioMapEngine";
 import SearchEngine from "./bio-search/SearchEngine";
 import FilterHeader from "./bio-image-search/FilterHeader";
-import { fetchSearchAction, fetchFacetsAction, setSearchModeAction } from "../store/reducer";
+import {
+  fetchSearchAction,
+  fetchFacetsAction,
+  setSearchModeAction,
+} from "../store/reducer";
 import LeftSideBar from "../animations/LeftSideBar";
 // import MobileSidebar from "./test/MobileSidebar";
 
@@ -17,10 +21,16 @@ function Toggle() {
 
   return (
     <div className="main-toggle">
-      <Button color="round" onClick={() => dispatch(setSearchModeAction("Map"))}>
+      <Button
+        color="round"
+        onClick={() => dispatch(setSearchModeAction("Map"))}
+      >
         Map
       </Button>
-      <Button color="round" onClick={() => dispatch(setSearchModeAction("Images"))}>
+      <Button
+        color="round"
+        onClick={() => dispatch(setSearchModeAction("Images"))}
+      >
         Image
       </Button>
     </div>
@@ -53,9 +63,7 @@ const BioImagesEngine = () => {
         <Toggle />
         <Col className="scroll-images">
           {/* Leaflet Map or Photo Gallery */}
-          {searchMode === "Map"
-            ? <BioMapEngine />
-            : <SearchEngine />}
+          {searchMode === "Map" ? <BioMapEngine /> : <SearchEngine />}
         </Col>
         {/* <div > */}
       </Row>

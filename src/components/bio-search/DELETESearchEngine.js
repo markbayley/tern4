@@ -1,3 +1,4 @@
+/* eslint no-alert: "off" */
 import React from "react";
 import PropTypes from "prop-types";
 import {
@@ -11,100 +12,38 @@ import {
   PaginationLink,
 } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
+import SearchResult from "./SearchResult";
+import DELETEBioResultPagination from "./DELETEBioResultPagination";
 import { updateFilterAction, fetchSearchAction } from "../../store/reducer";
 import "./SearchResult.scss";
+import NoResults from "./NoResults";
 import { bioSort } from "./bioSort";
 
-const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
-  const dispatch = useDispatch();
-
+const DELETESearchEngine = ({ embed }) => {
+  const data = useSelector((state) => state.search.hits);
+  const totalDocuments = useSelector((state) => state.search.totalDocuments);
+  const { page_size, page_num } = useSelector(
+    (state) => state.ui.searchFilters.pagination,
+  );
   const { sort_order, sort_column } = useSelector(
     (state) => state.ui.searchFilters.sort,
   );
+  const dispatch = useDispatch();
+
+  const {
+    pagination,
+    pages,
+    prevPage,
+    nextPage,
+    changePage,
+  } = DELETEBioResultPagination({
+    itemsPerPage: page_size,
+    startFrom: page_num,
+    totalImages: totalDocuments,
+  });
 
   const selectedSortColumn = bioSort.sort_columns.filter(
     (column) => column.column_name === sort_column,
-  );
-
-  const getPagination = (itemsPerPage, startFrom, totalImages) => {
-    const perPage = itemsPerPage || 10;
-    const pages = Math.ceil(totalImages / perPage);
-    const pagination = [];
-
-    const currentPage = startFrom <= pages ? startFrom : 1;
-
-    let ellipsisLeft = false;
-    let ellipsisRight = false;
-    for (let i = 1; i <= pages; i += 1) {
-      if (i === currentPage) {
-        pagination.push({ id: i, current: true, ellipsis: false });
-      } else if (
-        i < 10
-        || i > pages - 1
-        || i === currentPage - 1
-        || i === currentPage + 1
-      ) {
-        pagination.push({ id: i, current: false, ellipsis: false });
-      } else if (i > 1 && i < currentPage && !ellipsisLeft) {
-        pagination.push({ id: i, current: false, ellipsis: true });
-        ellipsisLeft = true;
-      } else if (i < pages && i > currentPage && !ellipsisRight) {
-        pagination.push({ id: i, current: false, ellipsis: true });
-        ellipsisRight = true;
-      }
-    }
-
-    const changePage = (page, e) => {
-      e.preventDefault();
-      if (page !== currentPage) {
-        dispatch(
-          updateFilterAction({
-            pagination: { page_size: itemsPerPage, page_num: page },
-          }),
-        );
-        dispatch(fetchSearchAction());
-      }
-    };
-
-    const goToPrevPage = (e) => {
-      e.preventDefault();
-      if (currentPage !== 1) {
-        dispatch(
-          updateFilterAction({
-            pagination: { page_size: itemsPerPage, page_num: currentPage - 1 },
-          }),
-        );
-        dispatch(fetchSearchAction());
-      }
-    };
-
-    const goToNextPage = (e) => {
-      e.preventDefault();
-      if (currentPage !== pages) {
-        dispatch(
-          updateFilterAction({
-            pagination: { page_size: itemsPerPage, page_num: currentPage + 1 },
-          }),
-        );
-        dispatch(fetchSearchAction());
-      }
-    };
-
-    return {
-      pagination,
-      pages,
-      prevPage: goToPrevPage,
-      nextPage: goToNextPage,
-      changePage,
-    };
-  };
-
-  const {
-    pagination, pages, prevPage, nextPage, changePage,
-  } = getPagination(
-    page_size,
-    page_num,
-    totalDocuments,
   );
 
   const handlePageSizeChange = (value) => {
@@ -127,8 +66,19 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
     );
     dispatch(fetchSearchAction());
   };
-  return (
+
+  const ShowPagination = () => (
     <div>
+      <Row>
+        {data.map((bioImageDocument) => (
+          <SearchResult
+            bioImageDocument={bioImageDocument["_source"]}
+            site_id={bioImageDocument["_source"]["site_id"].value}
+            key={bioImageDocument["_id"]}
+            embed={embed}
+          />
+        ))}
+      </Row>
       <Row className="pagination-row">
         <Pagination className="pagination">
           <div>
@@ -239,11 +189,16 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
       </Row>
     </div>
   );
+
+  return totalDocuments === 0 ? <NoResults /> : <ShowPagination />;
 };
 
-BioResultPagination.propTypes = {
-  page_size: PropTypes.number.isRequired,
-  page_num: PropTypes.number.isRequired,
-  totalDocuments: PropTypes.number.isRequired,
+DELETESearchEngine.propTypes = {
+  embed: PropTypes.bool,
 };
-export default BioResultPagination;
+
+DELETESearchEngine.defaultProps = {
+  embed: false,
+};
+
+export default DELETESearchEngine;
