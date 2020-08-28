@@ -68,10 +68,7 @@ const initialUiState = {
     },
     sort: {
       sort_order: "asc",
-      sort_column: {
-        column_name: "file_created",
-        column_label: "File Creation",
-      },
+      sort_column: "file_created",
     },
   },
 };

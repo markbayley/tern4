@@ -42,21 +42,29 @@ const SearchEngine = ({ embed }) => {
     totalImages: totalDocuments,
   });
 
+  const selectedSortColumn = bioSort.sort_columns.filter(
+    (column) => column.column_name === sort_column,
+  );
+
   const handlePageSizeChange = (value) => {
     dispatch(
       updateFilterAction({ pagination: { page_size: value, page_num } }),
     );
-    // trigger search
     dispatch(fetchSearchAction());
   };
 
   const handleSortBy = (value) => {
-    // TODO: Implement it
-    alert(`Not implemented yet!! ${value}`);
+    dispatch(updateFilterAction({ sort: { sort_column: value, sort_order } }));
+    dispatch(fetchSearchAction());
   };
+
   const handleSortOrder = (value) => {
-    // TODO: Implement it.
-    alert(`Not implemented yet!! ${value}`);
+    dispatch(
+      updateFilterAction({
+        sort: { sort_order: value, sort_column },
+      }),
+    );
+    dispatch(fetchSearchAction());
   };
 
   const ShowPagination = () => (
@@ -81,11 +89,12 @@ const SearchEngine = ({ embed }) => {
                 id="dropdown-basic-button"
                 className="pageitems"
               >
-                {sort_column.column_label}
+                {selectedSortColumn[0].column_label}
               </DropdownToggle>
               <DropdownMenu>
                 {bioSort.sort_columns.map((column) => (
                   <DropdownItem
+                    key={column.column_name}
                     onClick={() => handleSortBy(column.column_name)}
                   >
                     {column.column_label}
@@ -106,7 +115,10 @@ const SearchEngine = ({ embed }) => {
               </DropdownToggle>
               <DropdownMenu>
                 {bioSort.sort_order.map((sort) => (
-                  <DropdownItem onClick={() => handleSortOrder(sort)}>
+                  <DropdownItem
+                    key={sort}
+                    onClick={() => handleSortOrder(sort)}
+                  >
                     {sort}
                   </DropdownItem>
                 ))}
