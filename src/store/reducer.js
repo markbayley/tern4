@@ -63,7 +63,7 @@ const initialUiState = {
       end: "",
     },
     pagination: {
-      page_size: 32,
+      page_size: 24,
       page_num: 1,
     },
     sort: {

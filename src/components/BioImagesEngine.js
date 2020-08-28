@@ -21,7 +21,7 @@ function Toggle() {
         Map
       </Button>
       <Button color="round" onClick={() => dispatch(setSearchModeAction("Images"))}>
-        Image
+        Images
       </Button>
     </div>
   );
