@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <>
       <Container
-        className="main-footer"
+        className="footer-row"
         fluid
         style={{
           paddingLeft: "0%",

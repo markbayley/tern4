@@ -127,12 +127,12 @@
 /* FOOTER */ 
 
 .footer-row{
-  position: fixed;
+  position: relative;
   bottom: 0;
-  width: 103%;
+  width: 100%;
   line-height: 15px;
   background-color: #003d4f;
-  height: 35px;
+  height: 0px;
 }
 .footer-item {
   padding: 0 20px 0px 20px;

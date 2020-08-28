@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
+import { Button } from "reactstrap";
 import "./buttons.scss";
 
 function simulateNetworkRequest() {
@@ -23,7 +23,7 @@ function LoginButton() {
     <>
       <Button
         style={{ borderRadius: "10px" }}
-        variant="login"
+        color="login"
         size="md"
         disabled={isLoading}
         onClick={!isLoading ? handleClick : null}

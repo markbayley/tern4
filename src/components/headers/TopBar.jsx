@@ -1,6 +1,10 @@
-import React from "react";
-import { Navbar, NavItem, Nav, Button } from "react-bootstrap";
-import { Switch, Route, Link } from "react-router-dom";
+import React, { useState } from "react";
+import {
+  Navbar, NavItem, Nav, NavbarToggler, Collapse,
+} from "reactstrap";
+import {
+  Switch, Route, Link,
+} from "react-router-dom";
 import TERNDataDropdown from "../dropdowns/TERNDataDropdown";
 import CommunityDropdown from "../dropdowns/CommunityDropdown";
 import CoESRADropdown from "../dropdowns/CoESRADropdown";
@@ -8,38 +12,32 @@ import DataVisualiserDropdown from "../dropdowns/DataVisualiserDropdown";
 import './TopBar.scss';
 
 export default function TopBar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
+
   return (
     <div>
       <div className="above-header">
         <div className="container">
           <div className="above-header-section-wrap d-flex">
-            <Navbar expand="lg">
-              <Navbar.Toggle
-                aria-controls="basic-navbar-nav"
-                style={{ backgroundColor: "#fff" }}
-              />
-              {/* <Button style={{ borderRadius: "10px", float: "left" }} variant="flat" size="sm">
-                <span style={{ paddingRight: "5px" }}>
-                  <i className="fa fa-user"> </i>
-                </span>
-              </Button> */}
-
-              <Navbar.Collapse id="basic-navbar-nav">
-                <Nav navbar className="">
-                  <NavItem>
+            <Navbar expand="md" light style={{ padding: "0%" }}>
+              <NavbarToggler onClick={toggle} />
+              <Collapse navbar isOpen={isOpen}>
+                <Nav navbar className="ml-auto" tag="div">
+                  <NavItem tag="div">
                     <TERNDataDropdown />
                   </NavItem>
-                  <NavItem>
+                  <NavItem tag="div">
                     <DataVisualiserDropdown />
                   </NavItem>
-                  <NavItem>
+                  <NavItem tag="div">
                     <CoESRADropdown />
                   </NavItem>
-                  <NavItem>
+                  <NavItem tag="div">
                     <CommunityDropdown />
                   </NavItem>
                 </Nav>
-              </Navbar.Collapse>
+              </Collapse>
             </Navbar>
 
             <div className="above-header-section above-header-section-1">

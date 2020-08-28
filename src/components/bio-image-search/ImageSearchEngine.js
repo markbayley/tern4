@@ -1,9 +1,9 @@
 import React from "react";
-import BioFacets from "./BioFacets";
+import BioFacetsEngine from "../bio-image-facets/BioFacetsEngine";
 
 const ImageSearchEngine = () => (
   <div className="bio-facets">
-    <BioFacets />
+    <BioFacetsEngine />
   </div>
 );
 
