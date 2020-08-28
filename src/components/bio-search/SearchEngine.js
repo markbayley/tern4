@@ -7,7 +7,7 @@ import BioResultPagination from "./BioResultPagination";
 import "./SearchResult.scss";
 import NoResults from "./NoResults";
 
-const SearchEngine = ({ embed }) => {
+const SearchEngine = ({ embed, handleShow }) => {
   const data = useSelector((state) => state.search.hits);
   const totalDocuments = useSelector((state) => state.search.totalDocuments);
   const { page_size, page_num } = useSelector(
@@ -19,11 +19,11 @@ const SearchEngine = ({ embed }) => {
   const ShowPagination = () => (
     <div>
       {/* Mark you can now place it both at the top and bottom! */}
-      {/* <BioResultPagination
+      <BioResultPagination
         page_size={page_size}
         page_num={page_num}
         totalDocuments={totalDocuments}
-      /> */}
+      />
       <Row>
         {data.map((bioImageDocument) => (
           <SearchResult

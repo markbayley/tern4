@@ -1,9 +1,9 @@
 .pagination-row {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   position: relative;
-  bottom: 0;
+
   // left: 25px;
   padding-right: 5px;
   // background-color: lightgrey;
@@ -46,14 +46,14 @@
   // border: 1px solid #00565D;
   border-radius: 5px; 
   // box-shadow: lightgrey 1px 1px 1px 1px;
-  background-image: linear-gradient(to bottom right, #2a747a, #00565D);
+  background-image: linear-gradient(to bottom right,  #64acb3, #6EB3A6);
   margin-right: 3px;
 }
 
 .btn-pageitems:hover {
   background-color:  #6EB3A6;
   color: #fff;
-  background-image: linear-gradient(to bottom right, #64acb3, #00565D);
+  // background-image: linear-gradient(to bottom right, #64acb3, #6EB3A6);
 }
 
 .scroll-images {
