@@ -1,5 +1,5 @@
 export const bioSort = {
-  sort_order: ["asc", "desc"],
+  sort_order: ["Ascending", "Descending"],
   sort_columns: [
     { column_name: "file_created", column_label: "File Creation" },
     { column_name: "image_type", column_label: "Image Type" },

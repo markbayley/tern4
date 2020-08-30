@@ -1,8 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Label, Input, Container, Row, Col,
-} from "reactstrap";
+import { Label, Input, Container, Row, Col } from "reactstrap";
 // import moment from "moment";
 import {
   updateFilterAction,
@@ -13,7 +11,7 @@ import {
 const SimpleDateRangeFacet = () => {
   const dispatch = useDispatch();
   const { start, end } = useSelector(
-    (state) => state.ui.searchFilters.date_range,
+    (state) => state.ui.searchFilters.date_range
   );
 
   const handleOnDateChange = (event) => {
@@ -21,13 +19,13 @@ const SimpleDateRangeFacet = () => {
       dispatch(
         updateFilterAction({
           date_range: { [event.target.name]: event.target.value, end },
-        }),
+        })
       );
     } else {
       dispatch(
         updateFilterAction({
           date_range: { [event.target.name]: event.target.value, start },
-        }),
+        })
       );
     }
     // update facets
@@ -37,7 +35,7 @@ const SimpleDateRangeFacet = () => {
   };
 
   return (
-    <div style={{border: "1px solid #6EB3A6", borderRadius: "5px"}}>
+    <div style={{ border: "1px solid #6EB3A6", borderRadius: "5px" }}>
       <h6
         style={{
           paddingTop: "10px",
@@ -59,30 +57,25 @@ const SimpleDateRangeFacet = () => {
           </Col>
           </Row> */}
         <Row xs="2">
-          
-            <Input
-              type="date"
-              id="id-start"
-              name="start"
-              value={start}
-              min={start}
-              max={end}
-              onChange={handleOnDateChange}
-            />
-       
-       
-        
-            <Input
-              type="date"
-              id="id-end"
-              name="end"
-              value={end}
-              min={start}
-              max={end}
-              onChange={handleOnDateChange}
-            />
-      
-         
+          <Input
+            type="date"
+            id="id-start"
+            name="start"
+            value={start}
+            min={start}
+            max={end}
+            onChange={handleOnDateChange}
+          />
+
+          <Input
+            type="date"
+            id="id-end"
+            name="end"
+            value={end}
+            min={start}
+            max={end}
+            onChange={handleOnDateChange}
+          />
         </Row>
       </Container>
     </div>

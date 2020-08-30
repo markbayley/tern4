@@ -131,18 +131,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
   return (
     <div >
       <Row className="pagination-row">
-        <Pagination className="pagination">
-          <Button color="flat">
-            Showing
-            {" "}
-            {page_size}
-            {" "}
-            of
-            {" "}
-            {totalDocuments}
-            {" "}
-            images
-          </Button>
+        <Pagination className="pagination">  
           <div>
             <UncontrolledDropdown className="pageitems">
               <DropdownToggle
@@ -191,7 +180,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
               </DropdownMenu>
             </UncontrolledDropdown>
           </div>
-          <div>
+          <div style={{marginRight: "20px"}}>
             <UncontrolledDropdown className="pageitems">
               <DropdownToggle
                 caret
@@ -199,20 +188,20 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
                 id="dropdown-basic-button"
                 className="pageitems"
               >
-                {`${page_size} per page`}
+                {`${page_size} Images / Page`}
               </DropdownToggle>
               <DropdownMenu>
                 <DropdownItem onClick={() => handlePageSizeChange(12)}>
-                  12 per page
+                  12 images/page
                 </DropdownItem>
                 <DropdownItem onClick={() => handlePageSizeChange(24)}>
-                  24 per page
+                  24 images/page
                 </DropdownItem>
                 <DropdownItem onClick={() => handlePageSizeChange(48)}>
-                  48 per page
+                  48 images/page
                 </DropdownItem>
                 <DropdownItem onClick={() => handlePageSizeChange(96)}>
-                  96 per page
+                  96 images/page
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
@@ -251,7 +240,20 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
           <PaginationItem onClick={(e) => changePage(pages, e)}>
             <PaginationLink last>Last</PaginationLink>
           </PaginationItem>
+          <Button color="flat" style={{marginLeft: "20px"}}>
+            {/* Showing */}
+            {" "}
+            {page_size}
+            {" "}
+            {/* of */}
+            /
+            {" "}
+            {totalDocuments}
+            {" "}
+            Images
+          </Button>
         </Pagination>
+   
       </Row>
     </div>
   );
