@@ -132,7 +132,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
     <div >
       <Row className="pagination-row">
         <Pagination className="pagination">
-          <Button color="secondary">
+          <Button color="flat">
             Showing
             {" "}
             {page_size}

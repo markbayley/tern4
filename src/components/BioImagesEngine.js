@@ -22,16 +22,16 @@ function Toggle() {
   return (
     <div className="main-toggle">
       <Button
-        color="round"
+        color="flat"
         onClick={() => dispatch(setSearchModeAction("Map"))}
       >
         Map
       </Button>
       <Button
-        color="round"
+        color="login"
         onClick={() => dispatch(setSearchModeAction("Images"))}
       >
-        Image
+        Images
       </Button>
     </div>
   );
