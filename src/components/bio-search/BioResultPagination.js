@@ -9,6 +9,7 @@ import {
   Pagination,
   PaginationItem,
   PaginationLink,
+  Button,
 } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { updateFilterAction, fetchSearchAction } from "../../store/reducer";
@@ -131,6 +132,17 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
     <div>
       <Row className="pagination-row">
         <Pagination className="pagination">
+          <Button color="secondary">
+            Showing
+            {" "}
+            {page_size}
+            {" "}
+            of
+            {" "}
+            {totalDocuments}
+            {" "}
+            images
+          </Button>
           <div>
             <UncontrolledDropdown className="pageitems">
               <DropdownToggle
@@ -139,6 +151,8 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
                 id="dropdown-basic-button"
                 className="pageitems"
               >
+                Sort By:
+                {" "}
                 {selectedSortColumn[0].column_label}
               </DropdownToggle>
               <DropdownMenu>
@@ -161,6 +175,8 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
                 id="dropdown-basic-button"
                 className="pageitems"
               >
+                Sort Order:
+                {" "}
                 {sort_order}
               </DropdownToggle>
               <DropdownMenu>
