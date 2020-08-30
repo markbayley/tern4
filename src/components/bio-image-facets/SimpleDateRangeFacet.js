@@ -37,12 +37,12 @@ const SimpleDateRangeFacet = () => {
   };
 
   return (
-    <div style={{border: "1px solid lightgrey"}}>
+    <div style={{border: "1px solid #6EB3A6", borderRadius: "5px"}}>
       <h6
         style={{
           paddingTop: "10px",
           paddingLeft: "5px",
-          color: "#065f65",
+          color: "grey",
           fontWeight: "400",
         }}
       >

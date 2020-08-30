@@ -7,6 +7,7 @@ export const facetColourStyles = {
     ...styles,
     backgroundColor: "white",
     fontSize: "16px",
+    border: "1px solid #6EB3A6",
   }),
   option: (styles, {
     data, isDisabled, isFocused, isSelected,

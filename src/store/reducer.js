@@ -50,7 +50,7 @@ export const updateFilterAction = createAction("UPDATE_SEARCH_FILTER");
 // UI state reducers
 const initialUiState = {
   searchResults: {
-    searchMode: "Map",
+    searchMode: "Images",
   },
   searchFilters: {
     search_string: "",

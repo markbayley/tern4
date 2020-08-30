@@ -128,7 +128,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
     dispatch(fetchSearchAction());
   };
   return (
-    <div>
+    <div >
       <Row className="pagination-row">
         <Pagination className="pagination">
           <div>
@@ -186,17 +186,17 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
                 {`${page_size} per page`}
               </DropdownToggle>
               <DropdownMenu>
-                <DropdownItem onClick={() => handlePageSizeChange(10)}>
-                  10 per page
+                <DropdownItem onClick={() => handlePageSizeChange(12)}>
+                  12 per page
                 </DropdownItem>
-                <DropdownItem onClick={() => handlePageSizeChange(25)}>
-                  25 per page
+                <DropdownItem onClick={() => handlePageSizeChange(24)}>
+                  24 per page
                 </DropdownItem>
-                <DropdownItem onClick={() => handlePageSizeChange(50)}>
-                  50 per page
+                <DropdownItem onClick={() => handlePageSizeChange(48)}>
+                  48 per page
                 </DropdownItem>
-                <DropdownItem onClick={() => handlePageSizeChange(100)}>
-                  100 per page
+                <DropdownItem onClick={() => handlePageSizeChange(96)}>
+                  96 per page
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>

@@ -39,7 +39,7 @@ const DateRangeFacet = () => {
         <h6
           style={{
             paddingTop: "15px",
-            color: "#065f65",
+            color: "lightgrey",
             fontWeight: "500",
           }}
         >

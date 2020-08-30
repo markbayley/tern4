@@ -55,7 +55,7 @@ const SelectFacet = ({ facet, ...props }) => {
 
   return (
     <Select
-      className="mb-4"
+      className="mb-4 facet"
       isMulti
       options={options}
       value={cur_value}
