@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import {
@@ -19,10 +20,7 @@ import { Link } from "react-scroll";
 import "./SearchResult.scss";
 
 const SearchResult = ({
-  bioImageDocument,
-  site_id,
-  embed,
-  showCarousel,
+  bioImageDocument, site_id, embed, showCarousel,
 }) => {
   let img_url_small = null;
   let img_url_large = null;
@@ -245,10 +243,12 @@ SearchResult.propTypes = {
   bioImageDocument: PropTypes.objectOf(PropTypes.any).isRequired,
   site_id: PropTypes.string.isRequired,
   embed: PropTypes.bool,
+  showCarousel: PropTypes.func,
 };
 
 SearchResult.defaultProps = {
   embed: false,
+  showCarousel: null,
 };
 
 export default SearchResult;

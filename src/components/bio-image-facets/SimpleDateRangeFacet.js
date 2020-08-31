@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Label, Input, Container, Row, Col } from "reactstrap";
+import { Input, Container, Row } from "reactstrap";
 // import moment from "moment";
 import {
   updateFilterAction,
@@ -11,7 +11,7 @@ import {
 const SimpleDateRangeFacet = () => {
   const dispatch = useDispatch();
   const { start, end } = useSelector(
-    (state) => state.ui.searchFilters.date_range
+    (state) => state.ui.searchFilters.date_range,
   );
 
   const handleOnDateChange = (event) => {
@@ -19,13 +19,13 @@ const SimpleDateRangeFacet = () => {
       dispatch(
         updateFilterAction({
           date_range: { [event.target.name]: event.target.value, end },
-        })
+        }),
       );
     } else {
       dispatch(
         updateFilterAction({
           date_range: { [event.target.name]: event.target.value, start },
-        })
+        }),
       );
     }
     // update facets
@@ -47,15 +47,6 @@ const SimpleDateRangeFacet = () => {
         Date Range
       </h6>
       <Container>
-        {/* <Row>
-        <Col >
-          <Label for="id-start">Start</Label>
-          </Col>
-          <Col >
-     
-          <Label for="id-end">End</Label>
-          </Col>
-          </Row> */}
         <Row xs="2">
           <Input
             type="date"

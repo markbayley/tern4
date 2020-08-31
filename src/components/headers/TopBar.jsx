@@ -9,7 +9,7 @@ import TERNDataDropdown from "../dropdowns/TERNDataDropdown";
 import CommunityDropdown from "../dropdowns/CommunityDropdown";
 import CoESRADropdown from "../dropdowns/CoESRADropdown";
 import DataVisualiserDropdown from "../dropdowns/DataVisualiserDropdown";
-import './TopBar.scss';
+import "./TopBar.scss";
 
 export default function TopBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,7 +44,8 @@ export default function TopBar() {
               <div className="user-select">
                 <Link to="/">
                   {" "}
-                  <img src="img/logo-mini-all.png" alt="logo" />{" "}
+                  <img src="img/logo-mini-all.png" alt="logo" />
+                  {" "}
                 </Link>
               </div>
             </div>

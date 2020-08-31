@@ -45,10 +45,12 @@ const SearchEngine = ({ embed, handleShow }) => {
 
 SearchEngine.propTypes = {
   embed: PropTypes.bool,
+  handleShow: PropTypes.func,
 };
 
 SearchEngine.defaultProps = {
   embed: false,
+  handleShow: null,
 };
 
 export default SearchEngine;
