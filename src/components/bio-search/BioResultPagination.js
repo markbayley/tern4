@@ -27,6 +27,10 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
     (column) => column.column_name === sort_column,
   );
 
+  const selectedSortOrder = bioSort.sort_order.filter(
+    (sort) => sort.sort_name === sort_order,
+  );
+
   const getPagination = (itemsPerPage, startFrom, totalImages) => {
     const perPage = itemsPerPage || 10;
     const pages = Math.ceil(totalImages / perPage);
@@ -177,15 +181,15 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
               >
                 Sort Order:
                 {" "}
-                {sort_order}
+                {selectedSortOrder[0].sort_label}
               </DropdownToggle>
               <DropdownMenu>
                 {bioSort.sort_order.map((sort) => (
                   <DropdownItem
-                    key={sort}
-                    onClick={() => handleSortOrder(sort)}
+                    key={sort.sort_name}
+                    onClick={() => handleSortOrder(sort.sort_name)}
                   >
-                    {sort}
+                    {sort.sort_label}
                   </DropdownItem>
                 ))}
               </DropdownMenu>
