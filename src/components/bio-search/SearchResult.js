@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
+import { startCase } from "lodash";
 import PropTypes from "prop-types";
 import {
   Col,
@@ -81,38 +82,15 @@ const SearchResult = ({
           </Col>
           <Col className="modal-info" sm={5}>
             <h6>
-              {bioImageDocument.site_id.label
-                .replace("_", " ")
-                .replace("=", " ")
-                .replace("value", " ")
-                .replace(".", " ")
-                .replace("id", " ")
-                .replace("_", " ")
-                .replace("alic", "Alice Mulga")
-                .replace("capetrib", "Cape Tribulation")
-                .replace("cblp", "Cumberland Plain")
-                .replace("clpm", "Calperum Mallee")
-                .replace("fnqr robson", "Robson Creek")
-                .replace("gwwl", "Great Western Woodlands")
-                .replace("lfld", "Litchfield")
-                .replace("mgrl", "Mitchell Grass Rangeland")}
+              {bioImageDocument.site_id.label}
               {" "}
               <br />
-              {bioImageDocument.image_type.value.replace(
-                "lai",
-                "Leaf Area Index",
-              )}
+              {bioImageDocument.image_type.label}
               {" "}
               <br />
               Plot:
               {" "}
-              {bioImageDocument.plot.value
-                .replace("_", " ")
-                .replace("=", " ")
-                .replace("value", " ")
-                .replace(".", " ")
-                .replace("id", " ")
-                .replace("_", " ")}
+              {bioImageDocument.plot.label}
               {" "}
               <br />
               Date:
@@ -124,7 +102,6 @@ const SearchResult = ({
               {totalDocuments}
             </h6>
           </Col>
-          {/* </Modal.Title> */}
         </ModalHeader>
         <hr className="modal-line" />
         <ModalBody>
@@ -134,7 +111,6 @@ const SearchResult = ({
           <br />
           <Form className="center modal-select">
             {["checkbox"].map((type) => (
-              // <div key={bioImageDocument.id} className="mb-3">
               <div key={type} className="mb-3">
                 <Label check>
                   <Input type={type} id={bioImageDocument.id} key={type} />
@@ -178,21 +154,6 @@ const SearchResult = ({
               <div className="hvrbox-text">
                 View Image?
                 {" "}
-                {/* {site_id.replace("_", " ")
-                  .replace("=", " ")
-                  .replace("value", " ")
-                  .replace(".", " ")
-                  .replace("id", " ")
-                  .replace("_", " ")
-                  .replace("alic", "Alice Mulga")
-                  .replace("capetrib", "Cape Tribulation")
-                  .replace("cblp", "Cumberland Plain")
-                  .replace("clpm", "Calperum Mallee")
-                  .replace("fnqr robson", "Robson Creek")
-                  .replace("gwwl", "Great Western Woodlands")
-                  .replace("lfld", "Litchfield")
-                  .replace("mgrl", "Mitchell Grass Rangeland")
-                  .replace("lai ", "Leaf Area Index")} */}
                 <br />
                 <img
                   src="/img/icons/Bioimages icon.svg"
@@ -206,13 +167,10 @@ const SearchResult = ({
             </div>
             {" "}
             <div className="thumbnail-text">
-              {/* <strong>Site:</strong>  */}
               {bioImageDocument.site_id.label}
               <br />
-              {/* <strong>Image Type:</strong> */}
               {" "}
-              {bioImageDocument.image_type.value[0].toUpperCase()
-                + bioImageDocument.image_type.value.substr(1)}
+              {startCase(bioImageDocument.image_type.value)}
               {" "}
               <img
                 src="/img/phenocam.svg"
@@ -233,9 +191,6 @@ const SearchResult = ({
                 </div>
               ))}
             </Form>
-            {/* <strong>Image Count:</strong> {bioImageDocument.doc_count}{" "}  */}
-            {/* <strong>Plot:</strong> {bioImageDocument.plot.value}{" "} */}
-            {/* <strong>Visit:</strong> {bioImageDocument.site_visit_id}{" "} */}
           </Button>
         </div>
       </Card>
