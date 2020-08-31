@@ -22,13 +22,15 @@ const SearchEngine = ({ embed, handleShow }) => {
         totalDocuments={totalDocuments}
       />
       <Row>
-        {data.map((bioImageDocument) => (
+        {data.map((bioImageDocument, index) => (
           <SearchResult
             bioImageDocument={bioImageDocument["_source"]}
             site_id={bioImageDocument["_source"]["site_id"].value}
             key={bioImageDocument["_id"]}
             embed={embed}
             showCarousel={handleShow}
+            totalDocuments={totalDocuments}
+            index={index + 1}
           />
         ))}
       </Row>

@@ -20,7 +20,12 @@ import { Link } from "react-scroll";
 import "./SearchResult.scss";
 
 const SearchResult = ({
-  bioImageDocument, site_id, embed, showCarousel,
+  bioImageDocument,
+  site_id,
+  embed,
+  showCarousel,
+  totalDocuments,
+  index,
 }) => {
   let img_url_small = null;
   let img_url_large = null;
@@ -114,9 +119,9 @@ const SearchResult = ({
               {" "}
               {bioImageDocument.site_visit_id}
               <br />
-              {/* ID: {bioImageDocumentId.slice(-8)} */}
-              1/
-              {bioImageDocument.doc_count}
+              {index}
+              /
+              {totalDocuments}
             </h6>
           </Col>
           {/* </Modal.Title> */}
@@ -243,6 +248,8 @@ SearchResult.propTypes = {
   bioImageDocument: PropTypes.objectOf(PropTypes.any).isRequired,
   site_id: PropTypes.string.isRequired,
   embed: PropTypes.bool,
+  totalDocuments: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
   showCarousel: PropTypes.func,
 };
 
