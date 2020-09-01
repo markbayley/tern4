@@ -3,6 +3,7 @@ import React from "react";
 import Select from "react-select";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
+import { get } from "lodash";
 import {
   updateFilterAction,
   fetchFacetsAction,
@@ -17,6 +18,8 @@ const SelectFacet = ({ facet, ...props }) => {
   const selected = useSelector((state) => state.ui.searchFilters[facet]);
   // facet data as returned by ES
   const facets = useSelector((state) => state.search.facets[facet]);
+  // vocabulary with labels for facet values
+  const vocab = useSelector((state) => get(state.search.vocabs, facet, null));
 
   const selectedValues = new Set(selected.map((item) => item.value));
 
@@ -25,10 +28,7 @@ const SelectFacet = ({ facet, ...props }) => {
   const options = facets.buckets.map((item) => {
     const count = item.doc_count;
     const value = item.key;
-    let label = item.key;
-    if (item.hits) {
-      label = item.hits.hits.hits[0]["_source"][facet].label;
-    }
+    const label = get(vocab, `${item.key}.label`, item.key);
     const option = {
       label,
       value,

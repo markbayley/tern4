@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React from "react";
-import { startCase } from "lodash";
+import { startCase, get } from "lodash";
 import Select from "react-select";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +18,8 @@ const ImageTypeSelectFacet = ({ facet, ...props }) => {
   const selected = useSelector((state) => state.ui.searchFilters[facet]);
   // facet data as returned by ES
   const facets = useSelector((state) => state.search.facets[facet]);
+  // vocabulary with labels for facet values
+  const vocab = useSelector((state) => get(state.search.vocabs, facet, null));
 
   const selectedValues = new Set(selected.map((item) => item.value));
 
@@ -27,7 +29,7 @@ const ImageTypeSelectFacet = ({ facet, ...props }) => {
     const count = item.doc_count;
     const value = item.key;
 
-    const { label } = item.hits.hits.hits[0]["_source"][facet];
+    const label = get(vocab, `${value}.label`, facet);
     if (value === "ancillary") {
       return item["image_type_sub"].buckets.map((sub_type) => {
         const subCount = sub_type.doc_count;
@@ -36,7 +38,7 @@ const ImageTypeSelectFacet = ({ facet, ...props }) => {
         // Wilma and Andrew need to look at backend data
         const subValue = `ancillary.${sub_type.key.replace(/%20/gi, " ")}`;
         const subLabel = `${label}[${startCase(
-          sub_type.key.replace(/%20/gi, " "),
+          get(vocab, `${value}.${sub_type.key}.label`, sub_type.key).replace(/%20/gi, " "),
         )}]`;
         const option = {
           label: subLabel,

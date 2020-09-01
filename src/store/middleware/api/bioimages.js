@@ -52,3 +52,9 @@ export function fetchFacets(params) {
     params,
   });
 }
+
+export function fetchVocab(param) {
+  return callAPI({
+    url: `vocab/${param}`,
+  });
+}

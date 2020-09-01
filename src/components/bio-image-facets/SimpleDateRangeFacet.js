@@ -1,7 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Container, Row } from "reactstrap";
-// import moment from "moment";
+import { get } from "lodash";
+import moment from "moment";
 import {
   updateFilterAction,
   fetchFacetsAction,
@@ -13,6 +14,13 @@ const SimpleDateRangeFacet = () => {
   const { start, end } = useSelector(
     (state) => state.ui.searchFilters.date_range,
   );
+  let { min: date_min, max: date_max } = useSelector((state) => get(state.search.facets, "file_created", { min: null, max: null }));
+  if (date_min) {
+    date_min = moment(date_min).format("YYYY-MM-DD");
+  }
+  if (date_max) {
+    date_max = moment(date_max).format("YYYY-MM-DD");
+  }
 
   const handleOnDateChange = (event) => {
     if (event.target.name === "start") {
@@ -34,6 +42,15 @@ const SimpleDateRangeFacet = () => {
     dispatch(fetchSearchAction());
   };
 
+  const start_range = {
+    min: date_min,
+    max: end || date_max,
+  };
+  const end_range = {
+    min: start || date_min,
+    max: date_max,
+  };
+
   return (
     <div style={{ border: "1px solid #6EB3A6", borderRadius: "5px" }}>
       <h6
@@ -53,8 +70,8 @@ const SimpleDateRangeFacet = () => {
             id="id-start"
             name="start"
             value={start}
-            min={start}
-            max={end}
+            min={start_range.min}
+            max={start_range.max}
             onChange={handleOnDateChange}
           />
 
@@ -63,8 +80,8 @@ const SimpleDateRangeFacet = () => {
             id="id-end"
             name="end"
             value={end}
-            min={start}
-            max={end}
+            min={end_range.min}
+            max={end_range.max}
             onChange={handleOnDateChange}
           />
         </Row>

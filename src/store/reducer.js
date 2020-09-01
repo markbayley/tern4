@@ -5,6 +5,7 @@ export const fetchSearchDoneAction = createAction("FETCH_SEARCH_DONE");
 export const fetchSearchErrorAction = createAction("FETCH_SEARCH_ERROR");
 export const fetchFacetsAction = createAction("FETCH_FACETS");
 export const fetchFacetsDoneAction = createAction("FETCH_FACETS_DONE");
+export const fetchVocabsDoneAction = createAction("FETCH_VOCABS_DONE");
 
 const initialSearchState = {
   error: null,
@@ -18,6 +19,7 @@ const initialSearchState = {
     site_visit_id: { buckets: [] },
     image_type: { buckets: [] },
   },
+  vocabs: null,
 };
 
 const searchReducer = createReducer(initialSearchState, {
@@ -41,6 +43,9 @@ const searchReducer = createReducer(initialSearchState, {
   [fetchFacetsDoneAction]: (state, action) => {
     const { aggregations } = action.payload;
     state.facets = aggregations;
+  },
+  [fetchVocabsDoneAction]: (state, action) => {
+    state.vocabs = action.payload;
   },
 });
 
