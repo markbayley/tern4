@@ -175,6 +175,24 @@
   }
 }
 
+.app-error {
+  display: flex;
+  // justify-content: center;
+  align-items: center;
+  font-family: "museo-sans", sans-serif;
+  border: 2px solid #065f65;
+  margin: 17% 20% 0% 22%;
+  font-size: 18px;
+  background-color: #b3d4c9;
+  font-weight: 500;
+  height: 15vh;
+  color: red;
+  border-radius: 10px;
+  position: absolute;
+  z-index:20;
+  padding: 0% 3%;
+}
+
 @media (min-width: 1200px) {
   .small_preview {
     display: none;
