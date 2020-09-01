@@ -9,7 +9,7 @@ import {
   Label,
   Input,
   Modal,
-  ModalHeader, 
+  ModalHeader,
   ModalBody,
   ModalFooter,
   Navbar,
@@ -165,10 +165,9 @@ const SearchEngine = ({ embed }) => {
   );
 
   if (error) {
-    return (
-      <AppError />
-    );
-  } if (totalDocuments === 0) {
+    return <AppError />;
+  }
+  if (totalDocuments === 0) {
     return <NoResults />;
   }
   return <ShowPagination />;

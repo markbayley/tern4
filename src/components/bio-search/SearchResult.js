@@ -1,11 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  Card,
-  Button,
-  Col,
-  Form,
-} from "reactstrap";
+import { Card, Button, Col, Form } from "reactstrap";
 import "./SearchResult.scss";
 
 const SearchResult = ({
@@ -14,7 +9,7 @@ const SearchResult = ({
   embed,
   showCarousel,
   onClick,
-  handleShow
+  handleShow,
 }) => {
   const img_url_small = bioImageDocument.preview_urls[1].url;
   const img_url_large = bioImageDocument.preview_urls[0].url;
@@ -106,9 +101,7 @@ const SearchResult = ({
             <Form className="center image-form">
               {["checkbox"].map((type) => (
                 <div className="image-checkbox" key={type}>
-               
                   {/* <Form.Check inline type={type} id={bioImageDocument.id} /> */}
-            
                 </div>
               ))}
             </Form>
