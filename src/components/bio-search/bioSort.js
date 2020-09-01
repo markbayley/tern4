@@ -11,6 +11,5 @@ export const bioSort = {
     { column_name: "site_visit_id", column_label: "Site Visit Id" },
     { column_name: "camera_make", column_label: "Camera Make" },
     { column_name: "camera_model", column_label: "Camera Model" },
-    { column_name: "_id", column_label: "File Id" },
   ],
 };
