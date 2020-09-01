@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import "./style.scss";
-import { Button } from "react-bootstrap";
+import { Button } from "reactstrap";
 import { LeftSideBarContext } from "../LeftSideBarContext";
 
 const BurgerButton = ({ onClick, searchmode }) => {
@@ -11,7 +11,7 @@ const BurgerButton = ({ onClick, searchmode }) => {
     <Button
       className="LeftSideBar__BurgerButton"
       role="button"
-      variant="toggle"
+      color="toggle"
       onClick={onClick}
     >
       {isShowSidebar && <i className="fa fa-chevron-right" />}

@@ -1,19 +1,18 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
-import { Button } from "react-bootstrap";
+import { Button } from "reactstrap";
+import { useDispatch } from "react-redux";
 import BurgerButton from "../BurgerButton";
 import { LeftSideBarContext } from "../LeftSideBarContext";
 import "./style.scss";
 import SearchEngine from "../../../components/bio-search/SearchEngine";
-import BioMapEngine from "../../../components/bio-image-map/BioMapEngine";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchSearchAction, setSearchModeAction } from "../../../store/reducer";
+import { setSearchModeAction } from "../../../store/reducer";
 
 const LeftSection = ({ searchmode }) => {
   const { isShowSidebar, setIsShowSidebar } = useContext(LeftSideBarContext);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   return (
     <div className={`LeftSideBar__LeftSection LeftSideBar__LeftSection--${isShowSidebar ? "show" : "hide"}`}>
 
@@ -35,7 +34,7 @@ const LeftSection = ({ searchmode }) => {
             searchmode={searchmode}
             // onClick={() => setMySearch(searchmode === 'Map')}
             style={{ width: "100%" }}
-            variant="flat"
+            color="flat"
             onClick={() => dispatch(setSearchModeAction("Map"))}
           >
             <img src="img/map1.png" width="100%" alt="map" />
@@ -60,4 +59,3 @@ LeftSection.propTypes = {
 };
 
 export default LeftSection;
-
