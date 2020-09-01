@@ -41,13 +41,13 @@ const LeftSection = ({ searchmode }) => {
             <img src="img/map1.png" width="100%" alt="map" />
             Click the map to view
           </Button>
-          <Button
+          {/* <Button
             style={{ width: "100%" }}
             variant="flat"
           >
             <BioMapEngine embed />
 
-          </Button>
+          </Button> */}
         </div>
       )}
 
