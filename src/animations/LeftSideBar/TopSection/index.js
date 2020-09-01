@@ -10,8 +10,9 @@ const TopSection = ({ searchmode }) => {
     <div className="LeftSideBar__TopSection">
       <BurgerButton
         onClick={() => setIsShowSidebar(true)}
-        searchmode={searchmode}
+      
       />
+    
     </div>
   );
 };

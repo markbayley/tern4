@@ -32,7 +32,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
   );
 
   const getPagination = (itemsPerPage, startFrom, totalImages) => {
-    const perPage = itemsPerPage || 10;
+    const perPage = itemsPerPage || 4;
     const pages = Math.ceil(totalImages / perPage);
     const pagination = [];
 
@@ -139,20 +139,10 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
     <div>
       <Row className="pagination-row">
         <Pagination className="pagination">
-          <Button color="secondary">
-            Showing
-            {" "}
-            {page_size}
-            {" "}
-            of
-            {" "}
-            {totalDocuments}
-            {" "}
-            images
-          </Button>
-          <div>
+          <div className="mobile-pagination">
             <UncontrolledDropdown className="pageitems">
               <DropdownToggle
+                size="md"
                 caret
                 color="pageitems"
                 id="dropdown-basic-button"
@@ -174,9 +164,10 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
               </DropdownMenu>
             </UncontrolledDropdown>
           </div>
-          <div>
+          <div className="mobile-pagination">
             <UncontrolledDropdown className="pageitems">
               <DropdownToggle
+                size="md"
                 caret
                 color="pageitems"
                 id="dropdown-basic-button"
@@ -186,7 +177,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
                 {" "}
                 {selectedSortOrder[0].sort_label}
               </DropdownToggle>
-              <DropdownMenu>
+              <DropdownMenu >
                 {bioSort.sort_order.map((sort) => (
                   <DropdownItem
                     key={sort.sort_name}
@@ -198,9 +189,10 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
               </DropdownMenu>
             </UncontrolledDropdown>
           </div>
-          <div>
+          <div style={{marginRight: "20px"}}>
             <UncontrolledDropdown className="pageitems">
               <DropdownToggle
+                size="md"
                 caret
                 color="pageitems"
                 id="dropdown-basic-button"
@@ -254,6 +246,17 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
           <PaginationItem onClick={(e) => changePage(pages, e)}>
             <PaginationLink last title="Last" />
           </PaginationItem>
+          <Button className="mobile-pagination"color="flat" style={{marginLeft: "20px"}}>
+            {/* Showing
+            {" "} */}
+            {page_size}
+            {" "}
+            /
+            {" "}
+            {totalDocuments}
+            {" "}
+            Images
+          </Button>
         </Pagination>
       </Row>
     </div>

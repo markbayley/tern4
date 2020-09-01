@@ -54,7 +54,7 @@ const BioMapEngine = () => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
 
-          <FeatureGroup>
+          {/* <FeatureGroup>
             <EditControl
               position="bottomright"
             // onEdited={this._onEditPath}
@@ -62,7 +62,7 @@ const BioMapEngine = () => {
             // onDeleted={this._onDeleted}
             />
             <Circle center={[51.51, -0.06]} radius={200} />
-          </FeatureGroup>
+          </FeatureGroup> */}
 
           {/* API Markers */}
           {bioImageDocuments.map((bioImageDocument) => (
