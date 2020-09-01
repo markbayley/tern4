@@ -14,6 +14,13 @@ import {
 
 import { bioimages } from "./api";
 
+/**
+ * Convert selected filter values from UI to search parameters for API
+ *
+ * @param {object} filters - object with search parameters taken from redux store.
+ *
+ * @returns {object} objet that can be used as parameters for search and facet api.
+ */
 function filtersToParams(filters) {
   const params = {};
   Object.keys(filters).forEach((key) => {
@@ -77,6 +84,27 @@ function filtersToParams(filters) {
   return params;
 }
 
+/**
+ * Convert facet search result to structure used in redux store
+ *
+ * @param {object} data - facet result object returned from API
+ * @returns {object} facaet data to put into redux store
+ */
+function extractFacetResult(data) {
+  const result = { aggregations: {} };
+  // result["_shards"] = data["_shards"];
+  result.aggregations["image_type"] = data.aggregations["image_type"]["image_type"];
+  result.aggregations["file_created"] = data.aggregations["file_created"];
+  result.aggregations.plot = data.aggregations.plot.plot;
+  result.aggregations["site_id"] = data.aggregations["site_id"]["site_id"];
+  result.aggregations["site_visit_id"] = data.aggregations["site_visit_id"]["site_visit_id"];
+  result.aggregations["file_created"] = data.aggregations["file_created"]["file_created"];
+  result.hits = data.hits;
+  // result.timed_out = data.timed_out;
+  // result.took = data.took;
+  return result;
+}
+
 function* fetchSearchSaga() {
   try {
     // TODO: state may not be accurate at this stage ...
@@ -117,19 +145,7 @@ function* fetchFacetsSaga() {
       }));
     }
     // TODO: improve code here ... it's not obvious what's going on here
-    const result = {};
-    result["_shards"] = data["_shards"];
-    const aggs = {};
-    result.aggregations = aggs;
-    aggs["image_type"] = data.aggregations["image_type"]["image_type"];
-    aggs["file_created"] = data.aggregations["file_created"];
-    aggs.plot = data.aggregations.plot.plot;
-    aggs["site_id"] = data.aggregations["site_id"]["site_id"];
-    aggs["site_visit_id"] = data.aggregations["site_visit_id"]["site_visit_id"];
-    aggs["file_created"] = data.aggregations["file_created"]["file_created"];
-    result.hits = data.hits;
-    result.timed_out = data.timed_out;
-    result.took = data.took;
+    const result = extractFacetResult(data);
     yield put(fetchFacetsDoneAction(result));
   } catch (error) {
     yield put(fetchSearchErrorAction(error.message));
