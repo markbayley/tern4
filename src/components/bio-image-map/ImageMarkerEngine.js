@@ -35,7 +35,7 @@ const ImageMarkerEngine = ({ bioImageDocument, siteLocation }) => {
       name={bioImageDocument.site_id.label}
       images={bioImageDocument.image_type.label}
       plot={bioImageDocument.plot.label}
-      date={bioImageDocument.site_visit_id}
+      site_visit_id={bioImageDocument.site_visit_id}
     />
   );
 };

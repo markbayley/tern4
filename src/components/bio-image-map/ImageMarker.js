@@ -2,14 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Marker, Tooltip } from "react-leaflet";
 import L from "leaflet";
-import { parseBioImagesDate } from "../../bio_utils/bio_helpers";
 import "./Map.scss";
 
 const ImageMarker = (props) => {
   const {
-    id, plot, images, date, name, sitePosition,
+    id, plot, images, site_visit_id, name, sitePosition,
   } = props;
-  const formatedSiteVisitDate = parseBioImagesDate(date);
 
   return (
     <Marker
@@ -186,13 +184,13 @@ const ImageMarker = (props) => {
           </a>
           {" "}
           <br />
-          Date:
+          Visit:
           {" "}
           <a
             className="tool-tip-link"
             href="www.tern.org"
           >
-            {formatedSiteVisitDate}
+            {site_visit_id}
           </a>
           {" "}
           <br />
@@ -207,7 +205,7 @@ ImageMarker.propTypes = {
   name: PropTypes.string.isRequired,
   plot: PropTypes.string.isRequired,
   images: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
+  site_visit_id: PropTypes.string.isRequired,
   sitePosition: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
