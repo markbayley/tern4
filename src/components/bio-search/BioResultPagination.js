@@ -38,24 +38,27 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
 
     const currentPage = startFrom <= pages ? startFrom : 1;
 
-    let ellipsisLeft = false;
-    let ellipsisRight = false;
+    const showThisPage = (pageNo) => {
+      for (let i = 1; i < 3; i += 1) {
+        if (pageNo === currentPage + i) {
+          return true;
+        }
+        if (pageNo === currentPage - i) {
+          return true;
+        }
+      }
+      return false;
+    };
+
+    // TODO: [TERNDA-867] Change pagination to only show 5 pages
+    // between the prev and next buttons like portal.tern.org.au
     for (let i = 1; i <= pages; i += 1) {
       if (i === currentPage) {
-        pagination.push({ id: i, current: true, ellipsis: false });
-      } else if (
-        i < 4
-        || i > pages - 1
-        || i === currentPage - 1
-        || i === currentPage + 1
-      ) {
-        pagination.push({ id: i, current: false, ellipsis: false });
-      } else if (i > 1 && i < currentPage && !ellipsisLeft) {
-        pagination.push({ id: i, current: false, ellipsis: true });
-        ellipsisLeft = true;
-      } else if (i < pages && i > currentPage && !ellipsisRight) {
-        pagination.push({ id: i, current: false, ellipsis: true });
-        ellipsisRight = true;
+        pagination.push({ id: i, current: true, show: true });
+      } else if (showThisPage(i)) {
+        pagination.push({ id: i, current: false, show: true });
+      } else {
+        pagination.push({ id: i, current: false, show: false });
       }
     }
 
@@ -221,7 +224,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
           </PaginationItem>
           <div className="mobile-pagination">
             {pagination.map((page) => {
-              if (!page.ellipsis) {
+              if (page.show) {
                 return (
                   <div key={page.id} className="pagelink">
                     <PaginationItem
@@ -234,11 +237,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
                   </div>
                 );
               }
-              return (
-                <PaginationItem key={page.id}>
-                  <PaginationLink>...</PaginationLink>
-                </PaginationItem>
-              );
+              return null;
             })}
           </div>
           <PaginationItem onClick={nextPage}>
