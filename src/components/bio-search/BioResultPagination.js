@@ -136,18 +136,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
     <div>
       <Row className="pagination-row">
         <Pagination className="pagination">
-          <Button color="secondary">
-            Showing
-            {" "}
-            {page_size}
-            {" "}
-            of
-            {" "}
-            {totalDocuments}
-            {" "}
-            images
-          </Button>
-          <div>
+          <div className="mobile-pagination">
             <UncontrolledDropdown className="pageitems">
               <DropdownToggle
                 size="md"
@@ -172,7 +161,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
               </DropdownMenu>
             </UncontrolledDropdown>
           </div>
-          <div>
+          <div className="mobile-pagination">
             <UncontrolledDropdown className="pageitems">
               <DropdownToggle
                 size="md"
@@ -197,7 +186,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
               </DropdownMenu>
             </UncontrolledDropdown>
           </div>
-          <div>
+          <div style={{marginRight: "20px"}}>
             <UncontrolledDropdown className="pageitems">
               <DropdownToggle
                 size="md"
@@ -258,6 +247,17 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
           <PaginationItem onClick={(e) => changePage(pages, e)}>
             <PaginationLink last title="Last" />
           </PaginationItem>
+          <Button className="mobile-pagination"color="flat" style={{marginLeft: "20px"}}>
+            {/* Showing
+            {" "} */}
+            {page_size}
+            {" "}
+            /
+            {" "}
+            {totalDocuments}
+            {" "}
+            Images
+          </Button>
         </Pagination>
       </Row>
     </div>

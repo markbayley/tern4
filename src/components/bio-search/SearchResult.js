@@ -1,23 +1,12 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from "react";
-import { startCase } from "lodash";
+import React from "react";
 import PropTypes from "prop-types";
 import {
-  Col,
-  Button,
-  Form,
-  Input,
-  Label,
   Card,
-  NavbarBrand,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  UncontrolledCarousel,
-} from "reactstrap";
-import { Link } from "react-scroll";
-
+  Button,
+  Col,
+  Form,
+  Image
+} from "react-bootstrap";
 import "./SearchResult.scss";
 
 const SearchResult = ({
@@ -25,41 +14,12 @@ const SearchResult = ({
   site_id,
   embed,
   showCarousel,
-  totalDocuments,
-  index,
+  onClick,
+  handleShow
 }) => {
-  let img_url_small = null;
-  let img_url_large = null;
-  if (bioImageDocument.preview_urls.length !== 0) {
-    img_url_small = bioImageDocument.preview_urls[1].url;
-    img_url_large = bioImageDocument.preview_urls[0].url;
-  }
+  const img_url_small = bioImageDocument.preview_urls[1].url;
+  const img_url_large = bioImageDocument.preview_urls[0].url;
 
-  const [show, setShow] = useState(false);
-  const toggle = () => setShow(!show);
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
-
-  const items = [
-    {
-      key: 1,
-      src: img_url_large,
-      altText: "Slide 1",
-      caption: "Slide 1",
-    },
-    {
-      key: 2,
-      src: img_url_large,
-      altText: "Slide 2",
-      caption: "Slide 2",
-    },
-    {
-      key: 3,
-      src: img_url_large,
-      altText: "Slide 3",
-      caption: "Slide 3",
-    },
-  ];
   return (
     <Col
       xl={embed ? 7 : 2}
@@ -68,110 +28,70 @@ const SearchResult = ({
       sm={12}
       xs={12}
     >
-      <Modal size="lg" isOpen={show} toggle={toggle}>
-        <ModalHeader toggle={toggle} tag="div">
-          {" "}
-          <Col sm={2} className="modal-column">
-            <NavbarBrand tag="span">
-              <div className="site-branding">
-                <Link to="/">
-                  <img src="/img/logo@3x.png" alt="" />
-                </Link>
-              </div>
-            </NavbarBrand>
-          </Col>
-          <Col className="modal-info" sm={5}>
-            <h6>
-              {bioImageDocument.site_id.label}
-              {" "}
-              <br />
-              {bioImageDocument.image_type.label}
-              {" "}
-              <br />
-              Plot:
-              {" "}
-              {bioImageDocument.plot.label}
-              {" "}
-              <br />
-              Date:
-              {" "}
-              {bioImageDocument.site_visit_id}
-              <br />
-              {index}
-              /
-              {totalDocuments}
-            </h6>
-          </Col>
-        </ModalHeader>
-        <hr className="modal-line" />
-        <ModalBody>
-          {/* currently has a bug where it auto activates autoPlay... needs rework anyway */}
-          <UncontrolledCarousel items={items} autoPlay={false} />
-          {" "}
-          <br />
-          <Form className="center modal-select">
-            {["checkbox"].map((type) => (
-              <div key={type} className="mb-3">
-                <Label check>
-                  <Input type={type} id={bioImageDocument.id} key={type} />
-                  Add To Selected Images?
-                </Label>
-              </div>
-            ))}
-          </Form>
-          <p />
-        </ModalBody>
-        <ModalFooter>
-          <Button color="login" onClick={toggle}>
-            Close
-          </Button>
-          <Button color="login" onClick={toggle}>
-            Download
-          </Button>
-        </ModalFooter>
-      </Modal>
-
       <Card id={site_id} className="image-card">
         <div className="hvrbox">
-          <Button color="flat" className="image-card-button" onClick={toggle}>
-            <img
-              className="small_preview img-fluid"
-              onClick={toggle}
-              onKeyPress={() => {}}
-              role="presentation"
+          <Button
+            variant="flat"
+            className="image-card-button"
+            onClick={() => {
+              showCarousel();
+              onClick();
+            }}
+            style={{
+              width: "100%",
+              height: "0",
+              paddingTop: "76%",
+              backgroundImage: `url(${img_url_small})`,
+              backgroundSize: "cover",
+            }}
+          >
+            <Image
+              fluid
+              className="small_preview"
+              onClick={handleShow}
               src={img_url_small}
-              alt=""
             />
-            <img
-              className="large_preview img-fluid"
-              onClick={toggle}
-              onKeyPress={() => {}}
-              role="presentation"
+            <Image
+              fluid
+              className="large_preview"
+              onClick={handleShow}
               src={img_url_large}
-              alt=""
             />
             <div className="hvrbox-layer_top">
               <div className="hvrbox-text">
-                View Image?
-                {" "}
+                View Image?{" "}
+                {/* {site_id.replace("_", " ")
+                  .replace("=", " ")
+                  .replace("value", " ")
+                  .replace(".", " ")
+                  .replace("id", " ")
+                  .replace("_", " ")
+                  .replace("alic", "Alice Mulga")
+                  .replace("capetrib", "Cape Tribulation")
+                  .replace("cblp", "Cumberland Plain")
+                  .replace("clpm", "Calperum Mallee")
+                  .replace("fnqr robson", "Robson Creek")
+                  .replace("gwwl", "Great Western Woodlands")
+                  .replace("lfld", "Litchfield")
+                  .replace("mgrl", "Mitchell Grass Rangeland")
+                  .replace("lai ", "Leaf Area Index")} */}
                 <br />
                 <img
                   src="/img/icons/Bioimages icon.svg"
                   alt="bioimages icon"
-                  width="100px"
-                />
-                {" "}
+                  width="80px"
+                />{" "}
                 <br />
                 <span className="center" />
               </div>
-            </div>
-            {" "}
+            </div>{" "}
             <div className="thumbnail-text">
+              {/* <strong>Site:</strong>  */}
               {bioImageDocument.site_id.label}
               <br />
-              {" "}
-              {startCase(bioImageDocument.image_type.value)}
-              {" "}
+              {/* <strong>Image Type:</strong> */}{" "}
+              {bioImageDocument.image_type.value[0].toUpperCase() +
+                bioImageDocument.image_type.value.substr(1)}{" "}
               <img
                 src="/img/phenocam.svg"
                 width="20px"
@@ -187,10 +107,28 @@ const SearchResult = ({
             <Form className="center image-form">
               {["checkbox"].map((type) => (
                 <div className="image-checkbox" key={type}>
-                  <Input type={type} id={bioImageDocument.id} />
+                  {/* <Form.Check
+                  type={type}
+                  id={bioImageDocument.id}
+                  inline
+                  label="View"
+                  onClick={handleShow}
+                /> */}
+                  <Form.Check inline type={type} id={bioImageDocument.id} />
+                  {/* <Form.Check
+                  inline
+                  label="Download"
+                  type={type}
+                  id={bioImageDocument.id}
+                /> */}
+
+                  {/* {props.value.doc_count} */}
                 </div>
               ))}
             </Form>
+            {/* <strong>Image Count:</strong> {bioImageDocument.doc_count}{" "}  */}
+            {/* <strong>Plot:</strong> {bioImageDocument.plot.value}{" "} */}
+            {/* <strong>Visit:</strong> {bioImageDocument.site_visit_id}{" "} */}
           </Button>
         </div>
       </Card>
@@ -203,14 +141,10 @@ SearchResult.propTypes = {
   bioImageDocument: PropTypes.objectOf(PropTypes.any).isRequired,
   site_id: PropTypes.string.isRequired,
   embed: PropTypes.bool,
-  totalDocuments: PropTypes.number.isRequired,
-  index: PropTypes.number.isRequired,
-  showCarousel: PropTypes.func,
 };
 
 SearchResult.defaultProps = {
   embed: false,
-  showCarousel: null,
 };
 
 export default SearchResult;
