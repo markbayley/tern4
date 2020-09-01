@@ -52,7 +52,6 @@ const SearchEngine = ({ embed }) => {
         {data.map((bioImageDocument, index) => (
           <SearchResult
             bioImageDocument={bioImageDocument["_source"]}
-            site_id={bioImageDocument["_source"]["site_id"].value}
             key={bioImageDocument["_id"]}
             embed={embed}
             onClick={() => {

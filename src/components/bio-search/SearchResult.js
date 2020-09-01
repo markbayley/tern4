@@ -5,7 +5,6 @@ import "./SearchResult.scss";
 
 const SearchResult = ({
   bioImageDocument,
-  site_id,
   embed,
   showCarousel,
   onClick,
@@ -13,6 +12,8 @@ const SearchResult = ({
 }) => {
   const img_url_small = bioImageDocument.preview_urls[1].url;
   const img_url_large = bioImageDocument.preview_urls[0].url;
+
+  const site_id = bioImageDocument["site_id"].value;
 
   return (
     <Col
@@ -59,21 +60,6 @@ const SearchResult = ({
               <div className="hvrbox-text">
                 View Image?
                 {" "}
-                {/* {site_id.replace("_", " ")
-                  .replace("=", " ")
-                  .replace("value", " ")
-                  .replace(".", " ")
-                  .replace("id", " ")
-                  .replace("_", " ")
-                  .replace("alic", "Alice Mulga")
-                  .replace("capetrib", "Cape Tribulation")
-                  .replace("cblp", "Cumberland Plain")
-                  .replace("clpm", "Calperum Mallee")
-                  .replace("fnqr robson", "Robson Creek")
-                  .replace("gwwl", "Great Western Woodlands")
-                  .replace("lfld", "Litchfield")
-                  .replace("mgrl", "Mitchell Grass Rangeland")
-                  .replace("lai ", "Leaf Area Index")} */}
                 <br />
                 <img
                   src="/img/icons/Bioimages icon.svg"
@@ -127,7 +113,6 @@ const SearchResult = ({
 
 SearchResult.propTypes = {
   bioImageDocument: PropTypes.objectOf(PropTypes.any).isRequired,
-  site_id: PropTypes.string.isRequired,
   embed: PropTypes.bool,
   showCarousel: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
