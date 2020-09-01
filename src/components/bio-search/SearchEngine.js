@@ -16,6 +16,7 @@ import SearchResult from "./SearchResult";
 import BioResultPagination from "./BioResultPagination";
 import "./SearchResult.scss";
 import NoResults from "./NoResults";
+import AppError from "./AppError";
 
 const SearchEngine = ({ embed }) => {
   const data = useSelector((state) => state.search.hits);
@@ -25,11 +26,9 @@ const SearchEngine = ({ embed }) => {
     (state) => state.ui.searchFilters.pagination
   );
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const [clickedIndex, setClickedIndex] = useState(0);
+  // TODO: Would be nice to add logic somewhere to send us email
+  // if there is error. Will do it later. Just remember!!
+  const error = useSelector((state) => state.search.error);
 
   const ShowPagination = () => (
     <div>
@@ -162,7 +161,14 @@ const SearchEngine = ({ embed }) => {
     </div>
   );
 
-  return totalDocuments === 0 ? <NoResults /> : <ShowPagination />;
+  if (error) {
+    return (
+      <AppError />
+    );
+  } if (totalDocuments === 0) {
+    return <NoResults />;
+  }
+  return <ShowPagination />;
 };
 
 SearchEngine.propTypes = {

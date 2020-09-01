@@ -10,6 +10,7 @@ import Leaflet from "leaflet";
 import { useSelector } from "react-redux";
 import ImageMarkerEngine from "./ImageMarkerEngine";
 import NoResults from "../bio-search/NoResults";
+import AppError from "../bio-search/AppError";
 
 const BioMapEngine = () => {
   const [mapInitState] = useState({
@@ -22,6 +23,8 @@ const BioMapEngine = () => {
   const mapInitPosition = [mapInitState.lat, mapInitState.lng];
   const bioImageDocuments = useSelector((state) => state.search.hits);
   const totalImages = useSelector((state) => state.search.totalDocuments);
+
+  const error = useSelector((state) => state.search.error);
 
   // Set map boundary (australia)
   const corner1 = Leaflet.latLng(-9.820066, 115.240312);
@@ -74,6 +77,14 @@ const BioMapEngine = () => {
     </div>
   );
 
-  return <>{totalImages === 0 ? <NoResults /> : <BioMap />}</>;
+  // return <>{totalImages === 0 ? <NoResults /> : <BioMap />}</>;
+  if (error) {
+    return (
+      <AppError />
+    );
+  } if (totalImages === 0) {
+    return <NoResults />;
+  }
+  return <BioMap />;
 };
 export default BioMapEngine;
