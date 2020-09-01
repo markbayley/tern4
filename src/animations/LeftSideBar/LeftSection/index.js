@@ -19,33 +19,25 @@ const LeftSection = ({ searchmode }) => {
           searchmode={searchmode}
         />
       </div>
-      {searchmode === "Map" && (
-        <div className="scroll">
-          <SearchEngine embed />
-
-        </div>
-      )}
-      {searchmode === "Images" && (
-        <div>
-          {/* <Button
-            searchmode={searchmode}
-            // onClick={() => setMySearch(searchmode === 'Map')}
-            style={{ width: "100%" }}
-            color="flat"
+      <ul className="LeftSideBar__LeftSection__menuWrapper">
+        <li>
+          <a
+            href="#"
           >
-            <img src="img/map1.png" width="100%" alt="map" />
-            Click the map to view
-          </Button> */}
-          <Button
-            style={{ width: "100%" }}
-            color="flat"
+        
+            <img src="img/map1.png" />
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
           >
-            <BioMapEngine embed />
-
-          </Button>
-        </div>
-      )}
-
+          
+          </a>
+        </li>
+   
+      </ul>
+    
     </div>
   );
 };

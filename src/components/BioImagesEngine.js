@@ -23,13 +23,11 @@ function Toggle() {
     <div className="main-toggle">
       <Button
         color="flat"
-        size="md"
         onClick={() => dispatch(setSearchModeAction("Map"))}
       >
         Map
       </Button>
-      <Button style={{marginLeft: "3px"}}
-        size="md"
+      <Button
         color="login"
         onClick={() => dispatch(setSearchModeAction("Images"))}
       >
