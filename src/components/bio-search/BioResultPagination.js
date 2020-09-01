@@ -189,7 +189,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
               </DropdownMenu>
             </UncontrolledDropdown>
           </div>
-          <div style={{marginRight: "20px"}}>
+          <div style={{marginRight: "10px"}}>
             <UncontrolledDropdown className="pageitems">
               <DropdownToggle
                 size="md"
@@ -246,7 +246,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
           <PaginationItem onClick={(e) => changePage(pages, e)}>
             <PaginationLink last title="Last" />
           </PaginationItem>
-          <Button className="mobile-pagination"color="flat" style={{marginLeft: "20px"}}>
+          <Button className="mobile-pagination"color="flat" style={{marginLeft: "10px"}}>
             {/* Showing
             {" "} */}
             {page_size}

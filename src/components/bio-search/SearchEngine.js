@@ -12,9 +12,9 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Navbar,
   NavbarBrand,
   Carousel,
+  CarouselItem,
 } from "reactstrap";
 import { Link } from "react-scroll";
 import SearchResult from "./SearchResult";
@@ -35,9 +35,12 @@ const SearchEngine = ({ embed }) => {
   // if there is error. Will do it later. Just remember!!
   const error = useSelector((state) => state.search.error);
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // const [show, setShow] = useState(false);
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
+
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
 
   const [clickedIndex, setClickedIndex] = useState(0);
 
@@ -58,7 +61,7 @@ const SearchEngine = ({ embed }) => {
             onClick={() => {
               setClickedIndex(index);
             }}
-            showCarousel={handleShow}
+            showCarousel={toggle}
             totalDocuments={totalDocuments}
             index={index + 1}
           />
@@ -66,7 +69,7 @@ const SearchEngine = ({ embed }) => {
       </Row>
 
       {data && data[clickedIndex] && (
-        <Modal size="lg" show={show} onHide={handleClose}>
+        <Modal size="lg" isOpen={modal} toggle={toggle}>
           <ModalHeader closeButton className="modal-header">
             <ModalHeader>
               {" "}
@@ -127,29 +130,29 @@ const SearchEngine = ({ embed }) => {
                 .slice(clickedIndex)
                 .concat(data.slice(0, clickedIndex - 1))
                 .map((bioImageDocument) => (
-                  <Carousel.Item>
+                  <CarouselItem>
                     <img
-                      fluid
-                      className=""
+                      className="img-fluid"
                       src={bioImageDocument["_source"].preview_urls[0].url}
                       key={bioImageDocument["_id"]}
+                      alt="carousel"
                     />
-                  </Carousel.Item>
+                  </CarouselItem>
                 ))}
             </Carousel>
-            {/* <FormGroup check className="center modal-select">
-        <Label check>
-          <Input type="checkbox" />{' '}
-          Check me out
-        </Label>
-      </FormGroup> */}
+            <FormGroup check className="center modal-select">
+              <Label check>
+                <Input type="checkbox" />
+                Add to selected images?
+              </Label>
+            </FormGroup>
           </ModalBody>
           <br />
           <ModalFooter>
-            <Button variant="login" onClick={handleClose}>
+            <Button color="login" onClick={toggle}>
               Close
             </Button>
-            <Button variant="login" onClick={handleClose}>
+            <Button color="login" onClick={toggle}>
               Download
             </Button>
           </ModalFooter>
@@ -175,12 +178,12 @@ const SearchEngine = ({ embed }) => {
 
 SearchEngine.propTypes = {
   embed: PropTypes.bool,
-  handleShow: PropTypes.func,
+  toggle: PropTypes.func,
 };
 
 SearchEngine.defaultProps = {
   embed: false,
-  handleShow: null,
+  toggle: null,
 };
 
 export default SearchEngine;

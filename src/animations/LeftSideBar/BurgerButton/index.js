@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import "./style.scss";
-import { Button } from "reactstrap";
+import { Button } from "react-bootstrap";
 import { LeftSideBarContext } from "../LeftSideBarContext";
 
 const BurgerButton = ({ onClick, searchmode }) => {
@@ -11,11 +11,24 @@ const BurgerButton = ({ onClick, searchmode }) => {
     <Button
       className="LeftSideBar__BurgerButton"
       role="button"
-      color="toggle"
+      variant="toggle"
       onClick={onClick}
-  
     >
-    <img src="img/chevron.png" height="30px"/>Map
+      {isShowSidebar && <i className="fa fa-chevron-right" />}
+      {!isShowSidebar && (searchmode === "Map"
+        ? (
+          <>
+            <i className="fa fa-chevron-left" />
+            <img src="/img/Images.png" width="40px" alt="" />
+          </>
+        )
+        : (
+          <>
+            <i className="fa fa-chevron-left" />
+            <img src="/img/map.png" width="40px" alt="" />
+          </>
+        )
+      )}
     </Button>
   );
 };

@@ -9,7 +9,7 @@ const SearchResult = ({
   embed,
   showCarousel,
   onClick,
-  handleShow,
+  toggle,
 }) => {
   const img_url_small = bioImageDocument.preview_urls[1].url;
   const img_url_large = bioImageDocument.preview_urls[0].url;
@@ -34,26 +34,27 @@ const SearchResult = ({
             style={{
               width: "100%",
               height: "0",
-              paddingTop: "76%",
+              paddingTop: "70%",
               backgroundImage: `url(${img_url_small})`,
               backgroundSize: "cover",
             }}
           >
             <img
-              fluid
-              className="small_preview"
-              onClick={handleShow}
+              className="small_preview img-fluid"
+              onClick={toggle}
               src={img_url_small}
+              alt="small preview"
             />
             <img
-              fluid
-              className="large_preview"
-              onClick={handleShow}
+              className="large_preview img-fluid"
+              onClick={toggle}
               src={img_url_large}
+              alt="large preview"
             />
             <div className="hvrbox-layer_top">
               <div className="hvrbox-text">
-                View Image?{" "}
+                View Image?
+                {" "}
                 {/* {site_id.replace("_", " ")
                   .replace("=", " ")
                   .replace("value", " ")
@@ -74,18 +75,22 @@ const SearchResult = ({
                   src="/img/icons/Bioimages icon.svg"
                   alt="bioimages icon"
                   width="80px"
-                />{" "}
+                />
+                {" "}
                 <br />
                 <span className="center" />
               </div>
-            </div>{" "}
+            </div>
+            {" "}
             <div className="thumbnail-text">
               {/* <strong>Site:</strong>  */}
               {bioImageDocument.site_id.label}
               <br />
-              {/* <strong>Image Type:</strong> */}{" "}
+              {/* <strong>Image Type:</strong> */}
+              {" "}
               {bioImageDocument.image_type.value[0].toUpperCase() +
-                bioImageDocument.image_type.value.substr(1)}{" "}
+                bioImageDocument.image_type.value.substr(1)}
+              {" "}
               <img
                 src="/img/phenocam.svg"
                 width="20px"
