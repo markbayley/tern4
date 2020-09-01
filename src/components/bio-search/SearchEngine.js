@@ -30,6 +30,12 @@ const SearchEngine = ({ embed }) => {
   // if there is error. Will do it later. Just remember!!
   const error = useSelector((state) => state.search.error);
 
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const [clickedIndex, setClickedIndex] = useState(0);
+
   const ShowPagination = () => (
     <div>
       <BioResultPagination
