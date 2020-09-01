@@ -28,7 +28,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
   );
 
   const getPagination = (itemsPerPage, startFrom, totalImages) => {
-    const perPage = itemsPerPage || 10;
+    const perPage = itemsPerPage || 4;
     const pages = Math.ceil(totalImages / perPage);
     const pagination = [];
 
@@ -40,7 +40,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
       if (i === currentPage) {
         pagination.push({ id: i, current: true, ellipsis: false });
       } else if (
-        i < 10
+        i < 4
         || i > pages - 1
         || i === currentPage - 1
         || i === currentPage + 1
@@ -131,10 +131,11 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
   return (
     <div >
       <Row className="pagination-row">
-        <Pagination className="pagination">  
+        <Pagination size="md" className="pagination">  
           <div>
             <UncontrolledDropdown className="pageitems">
               <DropdownToggle
+                size="md"
                 caret
                 color="pageitems"
                 id="dropdown-basic-button"
@@ -159,6 +160,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
           <div>
             <UncontrolledDropdown className="pageitems">
               <DropdownToggle
+                size="md"
                 caret
                 color="pageitems"
                 id="dropdown-basic-button"
@@ -168,7 +170,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
                 {" "}
                 {sort_order}
               </DropdownToggle>
-              <DropdownMenu>
+              <DropdownMenu >
                 {bioSort.sort_order.map((sort) => (
                   <DropdownItem
                     key={sort}
@@ -183,12 +185,13 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
           <div style={{marginRight: "20px"}}>
             <UncontrolledDropdown className="pageitems">
               <DropdownToggle
+                size="md"
                 caret
                 color="pageitems"
                 id="dropdown-basic-button"
                 className="pageitems"
               >
-                {`${page_size} Images / Page`}
+                {`${page_size} Images`}
               </DropdownToggle>
               <DropdownMenu>
                 <DropdownItem onClick={() => handlePageSizeChange(12)}>
@@ -240,7 +243,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
           <PaginationItem onClick={(e) => changePage(pages, e)}>
             <PaginationLink last>Last</PaginationLink>
           </PaginationItem>
-          <Button color="flat" style={{marginLeft: "20px"}}>
+          <Button size="md" color="flat" style={{marginLeft: "20px"}}>
             {/* Showing */}
             {" "}
             {page_size}
