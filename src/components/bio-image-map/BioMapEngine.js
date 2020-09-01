@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import {
   Map,
   TileLayer,
-  FeatureGroup,
-  Circle,
 } from "react-leaflet";
-import { EditControl } from "react-leaflet-draw";
 import Leaflet from "leaflet";
 import { useSelector } from "react-redux";
 import ImageMarkerEngine from "./ImageMarkerEngine";

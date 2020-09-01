@@ -25,11 +25,8 @@ import AppError from "./AppError";
 
 const SearchEngine = ({ embed }) => {
   const data = useSelector((state) => state.search.hits);
-  const totalDocuments =
-    useSelector((state) => state.search.totalDocuments) || 0;
-  const { page_size, page_num } = useSelector(
-    (state) => state.ui.searchFilters.pagination
-  );
+  const totalDocuments = useSelector((state) => state.search.totalDocuments) || 0;
+  const { page_size, page_num } = useSelector((state) => state.ui.searchFilters.pagination);
 
   // TODO: Would be nice to add logic somewhere to send us email
   // if there is error. Will do it later. Just remember!!
@@ -64,6 +61,7 @@ const SearchEngine = ({ embed }) => {
             showCarousel={toggle}
             totalDocuments={totalDocuments}
             index={index + 1}
+            toggle={toggle}
           />
         ))}
       </Row>
@@ -102,22 +100,27 @@ const SearchEngine = ({ embed }) => {
                   <br />
                   {data[clickedIndex]["_source"].image_type.value.replace(
                     "lai",
-                    "Leaf Area Index"
-                  )}{" "}
+                    "Leaf Area Index",
+                  )}
+                  {" "}
                   <br />
-                  Plot:{" "}
+                  Plot:
+                  {" "}
                   {data[clickedIndex]["_source"].plot.value
                     .replace("_", " ")
                     .replace("=", " ")
                     .replace("value", " ")
                     .replace(".", " ")
                     .replace("id", " ")
-                    .replace("_", " ")}{" "}
+                    .replace("_", " ")}
+                  {" "}
                   <br />
                   Site Visit ID:
                   {data[clickedIndex]["_source"].site_visit_id}
                   <br />
-                  {data[clickedIndex]["_source"].index}/{page_size}
+                  {data[clickedIndex]["_source"].index}
+                  /
+                  {page_size}
                   {/* {data[clickedIndex]["_source"].doc_count} */}
                 </h6>
               </Col>
@@ -178,12 +181,10 @@ const SearchEngine = ({ embed }) => {
 
 SearchEngine.propTypes = {
   embed: PropTypes.bool,
-  toggle: PropTypes.func,
 };
 
 SearchEngine.defaultProps = {
   embed: false,
-  toggle: null,
 };
 
 export default SearchEngine;

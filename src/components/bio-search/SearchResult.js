@@ -44,12 +44,16 @@ const SearchResult = ({
               onClick={toggle}
               src={img_url_small}
               alt="small preview"
+              onKeyPress={() => { }}
+              role="none"
             />
             <img
               className="large_preview img-fluid"
               onClick={toggle}
               src={img_url_large}
               alt="large preview"
+              onKeyPress={() => { }}
+              role="none"
             />
             <div className="hvrbox-layer_top">
               <div className="hvrbox-text">
@@ -88,8 +92,8 @@ const SearchResult = ({
               <br />
               {/* <strong>Image Type:</strong> */}
               {" "}
-              {bioImageDocument.image_type.value[0].toUpperCase() +
-                bioImageDocument.image_type.value.substr(1)}
+              {bioImageDocument.image_type.value[0].toUpperCase()
+                + bioImageDocument.image_type.value.substr(1)}
               {" "}
               <img
                 src="/img/phenocam.svg"
@@ -125,6 +129,9 @@ SearchResult.propTypes = {
   bioImageDocument: PropTypes.objectOf(PropTypes.any).isRequired,
   site_id: PropTypes.string.isRequired,
   embed: PropTypes.bool,
+  showCarousel: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  toggle: PropTypes.func.isRequired,
 };
 
 SearchResult.defaultProps = {
