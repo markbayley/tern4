@@ -5,7 +5,7 @@ import { Button } from "reactstrap";
 import BurgerButton from "../BurgerButton";
 import { LeftSideBarContext } from "../LeftSideBarContext";
 import "./style.scss";
-import DELETESearchEngine from "../../../components/bio-search/DELETESearchEngine";
+import SearchEngine from "../../../components/bio-search/SearchEngine";
 import BioMapEngine from "../../../components/bio-image-map/BioMapEngine";
 
 const LeftSection = ({ searchmode }) => {
@@ -21,7 +21,7 @@ const LeftSection = ({ searchmode }) => {
       </div>
       {searchmode === "Map" && (
         <div className="scroll">
-          <DELETESearchEngine embed />
+          <SearchEngine embed />
 
         </div>
       )}

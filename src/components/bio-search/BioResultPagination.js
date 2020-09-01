@@ -27,6 +27,10 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
     (column) => column.column_name === sort_column,
   );
 
+  const selectedSortOrder = bioSort.sort_order.filter(
+    (sort) => sort.sort_name === sort_order,
+  );
+
   const getPagination = (itemsPerPage, startFrom, totalImages) => {
     const perPage = itemsPerPage || 4;
     const pages = Math.ceil(totalImages / perPage);
@@ -129,9 +133,20 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
     dispatch(fetchSearchAction());
   };
   return (
-    <div >
+    <div>
       <Row className="pagination-row">
-        <Pagination size="md" className="pagination">  
+        <Pagination className="pagination">
+          <Button color="secondary">
+            Showing
+            {" "}
+            {page_size}
+            {" "}
+            of
+            {" "}
+            {totalDocuments}
+            {" "}
+            images
+          </Button>
           <div>
             <UncontrolledDropdown className="pageitems">
               <DropdownToggle
@@ -168,21 +183,21 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
               >
                 Sort Order:
                 {" "}
-                {sort_order}
+                {selectedSortOrder[0].sort_label}
               </DropdownToggle>
               <DropdownMenu >
                 {bioSort.sort_order.map((sort) => (
                   <DropdownItem
-                    key={sort}
-                    onClick={() => handleSortOrder(sort)}
+                    key={sort.sort_name}
+                    onClick={() => handleSortOrder(sort.sort_name)}
                   >
-                    {sort}
+                    {sort.sort_label}
                   </DropdownItem>
                 ))}
               </DropdownMenu>
             </UncontrolledDropdown>
           </div>
-          <div style={{marginRight: "20px"}}>
+          <div>
             <UncontrolledDropdown className="pageitems">
               <DropdownToggle
                 size="md"
@@ -191,29 +206,29 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
                 id="dropdown-basic-button"
                 className="pageitems"
               >
-                {`${page_size} Images`}
+                {`${page_size} per page`}
               </DropdownToggle>
               <DropdownMenu>
-                <DropdownItem onClick={() => handlePageSizeChange(12)}>
-                  12 images/page
+                <DropdownItem onClick={() => handlePageSizeChange(10)}>
+                  10 per page
                 </DropdownItem>
-                <DropdownItem onClick={() => handlePageSizeChange(24)}>
-                  24 images/page
+                <DropdownItem onClick={() => handlePageSizeChange(25)}>
+                  25 per page
                 </DropdownItem>
-                <DropdownItem onClick={() => handlePageSizeChange(48)}>
-                  48 images/page
+                <DropdownItem onClick={() => handlePageSizeChange(50)}>
+                  50 per page
                 </DropdownItem>
-                <DropdownItem onClick={() => handlePageSizeChange(96)}>
-                  96 images/page
+                <DropdownItem onClick={() => handlePageSizeChange(100)}>
+                  100 per page
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
           </div>
           <PaginationItem onClick={(e) => changePage(1, e)}>
-            <PaginationLink first>First</PaginationLink>
+            <PaginationLink first title="First" />
           </PaginationItem>
           <PaginationItem onClick={prevPage}>
-            <PaginationLink previous>Previous</PaginationLink>
+            <PaginationLink previous title="Previous" />
           </PaginationItem>
           <div className="mobile-pagination">
             {pagination.map((page) => {
@@ -238,25 +253,12 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
             })}
           </div>
           <PaginationItem onClick={nextPage}>
-            <PaginationLink next>Next</PaginationLink>
+            <PaginationLink next title="Next" />
           </PaginationItem>
           <PaginationItem onClick={(e) => changePage(pages, e)}>
-            <PaginationLink last>Last</PaginationLink>
+            <PaginationLink last title="Last" />
           </PaginationItem>
-          <Button size="md" color="flat" style={{marginLeft: "20px"}}>
-            {/* Showing */}
-            {" "}
-            {page_size}
-            {" "}
-            {/* of */}
-            /
-            {" "}
-            {totalDocuments}
-            {" "}
-            Images
-          </Button>
         </Pagination>
-   
       </Row>
     </div>
   );

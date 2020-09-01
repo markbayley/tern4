@@ -9,29 +9,28 @@ import NoResults from "./NoResults";
 
 const SearchEngine = ({ embed, handleShow }) => {
   const data = useSelector((state) => state.search.hits);
-  const totalDocuments = useSelector((state) => state.search.totalDocuments);
+  const totalDocuments = useSelector((state) => state.search.totalDocuments) || 0;
   const { page_size, page_num } = useSelector(
-    (state) => state.ui.searchFilters.pagination
+    (state) => state.ui.searchFilters.pagination,
   );
 
-  // TODO: Mark please place and align/theme/configure pagination
-  // component both at the top and bottom.
   const ShowPagination = () => (
     <div>
-      {/* Mark you can now place it both at the top and bottom! */}
       <BioResultPagination
         page_size={page_size}
         page_num={page_num}
         totalDocuments={totalDocuments}
       />
       <Row>
-        {data.map((bioImageDocument) => (
+        {data.map((bioImageDocument, index) => (
           <SearchResult
             bioImageDocument={bioImageDocument["_source"]}
             site_id={bioImageDocument["_source"]["site_id"].value}
             key={bioImageDocument["_id"]}
             embed={embed}
             showCarousel={handleShow}
+            totalDocuments={totalDocuments}
+            index={index + 1}
           />
         ))}
       </Row>
@@ -48,10 +47,12 @@ const SearchEngine = ({ embed, handleShow }) => {
 
 SearchEngine.propTypes = {
   embed: PropTypes.bool,
+  handleShow: PropTypes.func,
 };
 
 SearchEngine.defaultProps = {
   embed: false,
+  handleShow: null,
 };
 
 export default SearchEngine;
