@@ -5,8 +5,7 @@ import {
   Button,
   Col,
   Form,
-  Image
-} from "react-bootstrap";
+} from "reactstrap";
 import "./SearchResult.scss";
 
 const SearchResult = ({
@@ -45,13 +44,13 @@ const SearchResult = ({
               backgroundSize: "cover",
             }}
           >
-            <Image
+            <img
               fluid
               className="small_preview"
               onClick={handleShow}
               src={img_url_small}
             />
-            <Image
+            <img
               fluid
               className="large_preview"
               onClick={handleShow}
@@ -107,22 +106,9 @@ const SearchResult = ({
             <Form className="center image-form">
               {["checkbox"].map((type) => (
                 <div className="image-checkbox" key={type}>
-                  {/* <Form.Check
-                  type={type}
-                  id={bioImageDocument.id}
-                  inline
-                  label="View"
-                  onClick={handleShow}
-                /> */}
-                  <Form.Check inline type={type} id={bioImageDocument.id} />
-                  {/* <Form.Check
-                  inline
-                  label="Download"
-                  type={type}
-                  id={bioImageDocument.id}
-                /> */}
-
-                  {/* {props.value.doc_count} */}
+               
+                  {/* <Form.Check inline type={type} id={bioImageDocument.id} /> */}
+            
                 </div>
               ))}
             </Form>

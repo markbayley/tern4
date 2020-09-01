@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Row } from "reactstrap";
 import { useSelector } from "react-redux";
 import {
   Button,
   Col,
-  Form,
+  Row,
+  FormGroup,
+  Label,
+  Input,
   Modal,
-  Image,
+  ModalHeader, 
+  ModalBody,
+  ModalFooter,
   Navbar,
+  NavbarBrand,
   Carousel,
-} from "react-bootstrap";
+} from "reactstrap";
 import { Link } from "react-scroll";
 import SearchResult from "./SearchResult";
 import BioResultPagination from "./BioResultPagination";
@@ -62,17 +67,17 @@ const SearchEngine = ({ embed }) => {
 
       {data && data[clickedIndex] && (
         <Modal size="lg" show={show} onHide={handleClose}>
-          <Modal.Header closeButton className="modal-header">
-            <Modal.Title>
+          <ModalHeader closeButton className="modal-header">
+            <ModalHeader>
               {" "}
               <Col sm={2} className="modal-column">
-                <Navbar.Brand>
+                <NavbarBrand>
                   <div className="site-branding">
                     <Link to="/">
                       <img src="/img/logo@3x.png" alt="" />
                     </Link>
                   </div>
-                </Navbar.Brand>
+                </NavbarBrand>
               </Col>
               <Col className="modal-info" sm={5}>
                 <h6>
@@ -113,49 +118,41 @@ const SearchEngine = ({ embed }) => {
                   {/* {data[clickedIndex]["_source"].doc_count} */}
                 </h6>
               </Col>
-            </Modal.Title>
-          </Modal.Header>
+            </ModalHeader>
+          </ModalHeader>
           <hr className="modal-line" />
-          <Modal.Body>
+          <ModalBody>
             <Carousel>
               {data
                 .slice(clickedIndex)
                 .concat(data.slice(0, clickedIndex - 1))
                 .map((bioImageDocument) => (
                   <Carousel.Item>
-                    <Image
+                    <img
                       fluid
-                      className="d-block w-100"
+                      className=""
                       src={bioImageDocument["_source"].preview_urls[0].url}
                       key={bioImageDocument["_id"]}
                     />
                   </Carousel.Item>
                 ))}
             </Carousel>
-            <Form className="center modal-select">
-              {["checkbox"].map((type) => (
-                // <div key={bioImageDocument.id} className="mb-3">
-                <div key={type} className="mb-3">
-                  <Form.Check
-                    inline
-                    label="Add To Selected Images?"
-                    type={type}
-                    // id={bioImageDocument.id}
-                    key={type}
-                  />
-                </div>
-              ))}
-            </Form>
-          </Modal.Body>
+            {/* <FormGroup check className="center modal-select">
+        <Label check>
+          <Input type="checkbox" />{' '}
+          Check me out
+        </Label>
+      </FormGroup> */}
+          </ModalBody>
           <br />
-          <Modal.Footer>
+          <ModalFooter>
             <Button variant="login" onClick={handleClose}>
               Close
             </Button>
             <Button variant="login" onClick={handleClose}>
               Download
             </Button>
-          </Modal.Footer>
+          </ModalFooter>
         </Modal>
       )}
 
