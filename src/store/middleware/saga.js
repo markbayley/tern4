@@ -91,8 +91,12 @@ function filtersToParams(filters) {
  * @returns {object} facaet data to put into redux store
  */
 function extractFacetResult(data) {
+  // TODO: flatten result, to store less data in store ...
+  //       pull only things out we are interested in to reduce
+  //       amount of browser storage neede (if required)
   const result = { aggregations: {} };
   // result["_shards"] = data["_shards"];
+  // TODO: we could do sorting of facet results here, so that ES does not need to do it
   result.aggregations["image_type"] = data.aggregations["image_type"]["image_type"];
   result.aggregations["file_created"] = data.aggregations["file_created"];
   result.aggregations.plot = data.aggregations.plot.plot;
@@ -129,11 +133,7 @@ function* fetchFacetsSaga() {
     const filters = yield select((state) => state.ui.searchFilters);
     const params = filtersToParams(filters);
     const { data } = yield call(bioimages.fetchFacets, params);
-    // TODO: flatten result, to store less data in store ...
-    //       pull only things out we are interested in
-    // TODO: sort hits.hits.hits._source here as well ... don't let ES do it
     const vocabs = yield select((state) => state.search.vocabs);
-    // TODO: need an isEm
     if (isEmpty(vocabs)) {
       const vocab_result = yield all({
         site_id: call(bioimages.fetchVocab, "site_id"),
@@ -144,7 +144,6 @@ function* fetchFacetsSaga() {
         image_type: vocab_result.image_type.data,
       }));
     }
-    // TODO: improve code here ... it's not obvious what's going on here
     const result = extractFacetResult(data);
     yield put(fetchFacetsDoneAction(result));
   } catch (error) {
