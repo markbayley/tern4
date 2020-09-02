@@ -1,6 +1,5 @@
 import React from "react";
-// import DateRangeFacet from "./DateRangeFacet";
-import SimpleDateRangeFacet from "./SimpleDateRangeFacet";
+import ReactDateRangeFacet from "./ReactDateRangeFacet";
 import SelectFacet from "./SelectFacet";
 import ImageTypeSelectFacet from "./ImageTypeSelectFacet";
 
@@ -10,8 +9,7 @@ const BioFacetsEngine = () => (
     <SelectFacet facet="plot" placeholder="Select Plots" />
     <SelectFacet facet="site_visit_id" placeholder="Select Site Visit Ids" />
     <ImageTypeSelectFacet facet="image_type" placeholder="Select Image Types" />
-    {/* <DateRangeFacet /> */}
-    <SimpleDateRangeFacet />
+    <ReactDateRangeFacet />
   </div>
 );
 
