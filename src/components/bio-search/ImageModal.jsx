@@ -52,7 +52,7 @@ const ImageModal = () => {
             Site Visit ID:
             {imageDoc.site_visit_id}
             <br />
-            {imageIdx}
+            {imageIdx + 1}
             /
             {numImages}
           </h6>

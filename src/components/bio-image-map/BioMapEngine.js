@@ -18,10 +18,13 @@ const BioMapEngine = () => {
     minZoom: 5,
   });
   const mapInitPosition = [mapInitState.lat, mapInitState.lng];
-  const bioImageDocuments = useSelector((state) => state.search.hits);
+  const sites = useSelector((state) => state.search.facets.site_id.buckets);
   const totalImages = useSelector((state) => state.search.totalDocuments);
 
   const error = useSelector((state) => state.search.error);
+
+  const selectedSites = useSelector((state) => state.ui.searchFilters.site_id);
+  const selectedSiteIds = new Set(selectedSites.map((site) => site.value));
 
   // Set map boundary (australia)
   const corner1 = Leaflet.latLng(-9.820066, 115.240312);
@@ -62,11 +65,17 @@ const BioMapEngine = () => {
           </FeatureGroup> */}
 
           {/* API Markers */}
-          {bioImageDocuments.map((bioImageDocument) => (
+          {/* TODO: decide what we want:
+                    if map is a facet selector we want to show all sites and
+                       use styles to show selected and 0 result sites. (current impl.)
+                    if map shows result sites, we need to change the API to
+                       return a site aggregation with sub aggregations about additional data.
+          */}
+          {sites.map((site) => (
             <ImageMarkerEngine
-              bioImageDocument={bioImageDocument["_source"]}
-              siteLocation={bioImageDocument["_source"]["site_id"].value}
-              key={bioImageDocument["_id"]}
+              site={site}
+              key={site.key}
+              selected={selectedSiteIds.has(site.key)}
             />
           ))}
         </Map>
