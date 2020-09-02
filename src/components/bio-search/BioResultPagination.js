@@ -20,15 +20,15 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
   const dispatch = useDispatch();
 
   const { sort_order, sort_column } = useSelector(
-    (state) => state.ui.searchFilters.sort,
+    (state) => state.ui.searchFilters.sort
   );
 
   const selectedSortColumn = bioSort.sort_columns.filter(
-    (column) => column.column_name === sort_column,
+    (column) => column.column_name === sort_column
   );
 
   const selectedSortOrder = bioSort.sort_order.filter(
-    (sort) => sort.sort_name === sort_order,
+    (sort) => sort.sort_name === sort_order
   );
 
   const getPagination = (itemsPerPage, startFrom, totalImages) => {
@@ -68,7 +68,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
         dispatch(
           updateFilterAction({
             pagination: { page_size: itemsPerPage, page_num: page },
-          }),
+          })
         );
         dispatch(fetchSearchAction());
       }
@@ -80,7 +80,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
         dispatch(
           updateFilterAction({
             pagination: { page_size: itemsPerPage, page_num: currentPage - 1 },
-          }),
+          })
         );
         dispatch(fetchSearchAction());
       }
@@ -92,7 +92,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
         dispatch(
           updateFilterAction({
             pagination: { page_size: itemsPerPage, page_num: currentPage + 1 },
-          }),
+          })
         );
         dispatch(fetchSearchAction());
       }
@@ -107,17 +107,15 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
     };
   };
 
-  const {
-    pagination, pages, prevPage, nextPage, changePage,
-  } = getPagination(
+  const { pagination, pages, prevPage, nextPage, changePage } = getPagination(
     page_size,
     page_num,
-    totalDocuments,
+    totalDocuments
   );
 
   const handlePageSizeChange = (value) => {
     dispatch(
-      updateFilterAction({ pagination: { page_size: value, page_num } }),
+      updateFilterAction({ pagination: { page_size: value, page_num } })
     );
     dispatch(fetchSearchAction());
   };
@@ -131,25 +129,24 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
     dispatch(
       updateFilterAction({
         sort: { sort_order: value, sort_column },
-      }),
+      })
     );
     dispatch(fetchSearchAction());
   };
   return (
     <div>
       <Row className="pagination-row">
-        <Pagination className="pagination">
+        <Pagination className="pagination" size="sm">
           <div className="mobile-pagination">
             <UncontrolledDropdown className="pageitems">
+              Sort By:{" "}
               <DropdownToggle
-                size="md"
+                size="sm"
                 caret
                 color="pageitems"
                 id="dropdown-basic-button"
                 className="pageitems"
               >
-                Sort By:
-                {" "}
                 {selectedSortColumn[0].column_label}
               </DropdownToggle>
               <DropdownMenu>
@@ -164,41 +161,18 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
               </DropdownMenu>
             </UncontrolledDropdown>
           </div>
-          <div className="mobile-pagination">
-            <UncontrolledDropdown className="pageitems">
-              <DropdownToggle
-                size="md"
-                caret
-                color="pageitems"
-                id="dropdown-basic-button"
-                className="pageitems"
-              >
-                Sort Order:
-                {" "}
-                {selectedSortOrder[0].sort_label}
-              </DropdownToggle>
-              <DropdownMenu>
-                {bioSort.sort_order.map((sort) => (
-                  <DropdownItem
-                    key={sort.sort_name}
-                    onClick={() => handleSortOrder(sort.sort_name)}
-                  >
-                    {sort.sort_label}
-                  </DropdownItem>
-                ))}
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          </div>
+
           <div style={{ marginRight: "10px" }}>
             <UncontrolledDropdown className="pageitems">
+              Images / Page:{" "}
               <DropdownToggle
-                size="md"
+                size="sm"
                 caret
                 color="pageitems"
                 id="dropdown-basic-button"
                 className="pageitems"
               >
-                {`${page_size} per page`}
+                {`${page_size}`}
               </DropdownToggle>
               <DropdownMenu>
                 <DropdownItem onClick={() => handlePageSizeChange(10)}>
@@ -246,16 +220,15 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
           <PaginationItem onClick={(e) => changePage(pages, e)}>
             <PaginationLink last title="Last" />
           </PaginationItem>
-          <Button className="mobile-pagination" color="flat" style={{ marginLeft: "10px" }}>
+          <Button
+            className="page-items"
+            color="flat"
+            size="small"
+            style={{ marginLeft: "10px", fontSize: "15px" }}
+          >
             {/* Showing
             {" "} */}
-            {page_size}
-            {" "}
-            /
-            {" "}
-            {totalDocuments}
-            {" "}
-            Images
+            {page_size} / {totalDocuments} Images
           </Button>
         </Pagination>
       </Row>

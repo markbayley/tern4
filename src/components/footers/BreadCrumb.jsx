@@ -23,7 +23,7 @@ const BreadCrumb = () => (
         </NavLink>
       </NavItem>
     </Row>
-    <Col className="select-all">
+    {/* <Col className="select-all">
       <Form>
         <FormGroup check inline>
           <Label check>
@@ -32,7 +32,7 @@ const BreadCrumb = () => (
           </Label>
         </FormGroup>
       </Form>
-    </Col>
+    </Col> */}
   </Breadcrumb>
 );
 
