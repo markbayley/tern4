@@ -28,9 +28,13 @@
   }
 
   .main-toggle {
-    position: fixed;
+    position: absolute;
     right: 1%;
     bottom: 4px;
+    // left: 90%;
+    // top: 157px;
+    // left: 400px;
+    // top: 220px;
     z-index: 100 !important;
   }
 

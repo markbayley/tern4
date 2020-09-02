@@ -136,7 +136,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
   return (
     <div>
       <Row className="pagination-row">
-        <Pagination className="pagination" size="sm">
+        <Pagination className="pagination" size="md">
           <div className="mobile-pagination">
             <UncontrolledDropdown className="pageitems">
               Sort By:{" "}
@@ -223,8 +223,8 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
           <Button
             className="page-items"
             color="flat"
-            size="small"
-            style={{ marginLeft: "10px", fontSize: "15px" }}
+            size="md"
+            style={{ marginLeft: "10px", fontSize: "16px" }}
           >
             {/* Showing
             {" "} */}
