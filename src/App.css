@@ -258,6 +258,13 @@ body {
   border-radius: 50%;
   border: 5px solid rgba(84, 179, 166, 0.9);
 }
+.custom-marker-selected {
+  background: #e36a51;
+}
+.custom-marker-disabled {
+  background: #333333;
+  border: 5px solid rgba(33, 33, 33, 0.9);
+}
 .custom-marker:hover {
   background: #e36a51;
   border: -10px solid rgba(149, 219, 199);
@@ -404,7 +411,7 @@ body {
     display: "flex";
     justify-content: "center";
     margin-bottom: "10px";
- 
+
   }
 }
 
@@ -555,7 +562,7 @@ a.search-link.addlinks {
 
 /* Testing */
 .bio-facets {
-  margin: 20px 10px; 
+  margin: 20px 10px;
   color: #065f65;
 }
 
@@ -563,7 +570,7 @@ a.search-link.addlinks {
 
 @media (max-width: 1520px) {
   .toggle {
-   
+
   }
 
 }
@@ -650,7 +657,7 @@ a.search-link.addlinks{
   }
 }
 .navbar-dark .navbar-nav .nav-link{
-  color: #ffffff !important;  
+  color: #ffffff !important;
 }
 .search-for-mobile{
   display: none;
@@ -672,9 +679,9 @@ a.search-link.addlinks{
   .searchbar-wrap{
     width:100%;
     margin:0;
-    padding: 0 15px !important;  
+    padding: 0 15px !important;
   }
-  
+
 }
 
 
@@ -691,4 +698,3 @@ a.search-link.addlinks{
   .main-header> :nth-child(2) { order: 3; }
   .main-header> :nth-child(3) { order: 1; }
 }
-

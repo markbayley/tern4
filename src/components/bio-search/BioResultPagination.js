@@ -23,10 +23,6 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
     (state) => state.ui.searchFilters.sort
   );
 
-  const selectedSortColumn = bioSort.sort_columns.filter(
-    (column) => column.column_name === sort_column
-  );
-
   const selectedSortOrder = bioSort.sort_order.filter(
     (sort) => sort.sort_name === sort_order
   );
@@ -120,11 +116,6 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
     dispatch(fetchSearchAction());
   };
 
-  const handleSortBy = (value) => {
-    dispatch(updateFilterAction({ sort: { sort_column: value, sort_order } }));
-    dispatch(fetchSearchAction());
-  };
-
   const handleSortOrder = (value) => {
     dispatch(
       updateFilterAction({
@@ -147,21 +138,22 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
                 id="dropdown-basic-button"
                 className="pageitems"
               >
-                {selectedSortColumn[0].column_label}
+                Sort Order:
+                {" "}
+                {selectedSortOrder[0].sort_label}
               </DropdownToggle>
               <DropdownMenu>
-                {bioSort.sort_columns.map((column) => (
+                {bioSort.sort_order.map((sort) => (
                   <DropdownItem
-                    key={column.column_name}
-                    onClick={() => handleSortBy(column.column_name)}
+                    key={sort.sort_name}
+                    onClick={() => handleSortOrder(sort.sort_name)}
                   >
-                    {column.column_label}
+                    {sort.sort_label}
                   </DropdownItem>
                 ))}
               </DropdownMenu>
             </UncontrolledDropdown>
           </div>
-
           <div style={{ marginRight: "10px" }}>
             <UncontrolledDropdown className="pageitems">
               Images / Page:{" "}

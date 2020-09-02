@@ -28,12 +28,11 @@ const searchReducer = createReducer(initialSearchState, {
   },
   [fetchSearchDoneAction]: (state, action) => {
     state.isLoadingSearch = false;
-    const { hits, page_num, page_size } = action.payload;
+    const { hits } = action.payload;
     if (hits) {
       // Null, Undefined, Empty, Whatever .... All Means No Results
       state.hits = hits.hits;
       state.totalDocuments = hits.total.value;
-      state.pagination = { page_size, page_num };
     }
   },
   [fetchSearchErrorAction]: (state, action) => {
@@ -51,6 +50,8 @@ const searchReducer = createReducer(initialSearchState, {
 
 export const setSearchModeAction = createAction("SET_SEARCH_MODE");
 export const updateFilterAction = createAction("UPDATE_SEARCH_FILTER");
+export const showModalAction = createAction("SHOW_IMAGE_MODAL");
+export const showImagePreviewAction = createAction("SHOW_IMAGE_PREVIEW");
 
 // UI state reducers
 const initialUiState = {
@@ -76,6 +77,10 @@ const initialUiState = {
       sort_column: "file_created",
     },
   },
+  imageModal: {
+    show: false,
+    imageIdx: 0,
+  },
 };
 
 const uiReducer = createReducer(initialUiState, {
@@ -84,7 +89,38 @@ const uiReducer = createReducer(initialUiState, {
   },
   // updateFilterAction leaves filters not mentioned in payload unchanged
   [updateFilterAction]: (state, action) => {
+    const { pagination } = action.payload;
+    // TODO: this is a bad workaround to avoid issues with paging past 10000 results
+    //       we need a better way to deal with that but for now this avoids errors
+    if (pagination) {
+      // we are updating pagination
+      if (state.searchFilters.pagination.page_size !== pagination.page_size) {
+        // updating page_size ... re-calc page_num
+        pagination.page_num = Math.floor(
+          (state.searchFilters.pagination.page_size * state.searchFilters.pagination.page_num)
+          / pagination.page_size,
+        );
+      }
+      // check if page_num * page_size > 10000
+      if ((pagination.page_num * pagination.page_size) > 10000) {
+        // fix page_num to last page
+        pagination.page_num = Math.floor(10000 / pagination.page_size);
+      }
+      action.payload.pagination = pagination;
+    }
     Object.assign(state.searchFilters, action.payload);
+  },
+  [fetchSearchDoneAction]: (state) => {
+    state.imageModal.imageIdx = 0;
+  },
+  [showModalAction]: (state, action) => {
+    state.imageModal.show = action.payload;
+  },
+  [showImagePreviewAction]: (state, action) => {
+    state.imageModal = {
+      show: true,
+      imageIdx: action.payload,
+    };
   },
 });
 

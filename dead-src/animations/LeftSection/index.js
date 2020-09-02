@@ -10,6 +10,8 @@ import SearchEngine from "../../../components/bio-search/SearchEngine";
 import { setSearchModeAction } from "../../../store/reducer";
 
 const LeftSection = ({ searchmode }) => {
+  // TODO: even if sidebar is hidden, it still renders map or images ...
+  //       don't render anything unless sidebar is visible
   const { isShowSidebar, setIsShowSidebar } = useContext(LeftSideBarContext);
 
   const dispatch = useDispatch();
