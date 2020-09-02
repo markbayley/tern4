@@ -121,7 +121,9 @@ function* fetchSearchSaga() {
     yield put(fetchSearchErrorAction(error.message));
   } finally {
     if (yield cancelled()) {
-      yield put(fetchSearchErrorAction("fetch Search cancelled"));
+      // ignore if cancelled ... there should be another request in flight
+      // TODO: do something useful here?
+      // yield put(fetchSearchErrorAction("fetch Search cancelled"));
     }
   }
 }
@@ -134,6 +136,7 @@ function* fetchFacetsSaga() {
     const params = filtersToParams(filters);
     const { data } = yield call(bioimages.fetchFacets, params);
     const vocabs = yield select((state) => state.search.vocabs);
+    // TODO: we probably want to load vocabs regularly / or on page load
     if (isEmpty(vocabs)) {
       const vocab_result = yield all({
         site_id: call(bioimages.fetchVocab, "site_id"),
@@ -150,7 +153,9 @@ function* fetchFacetsSaga() {
     yield put(fetchSearchErrorAction(error.message));
   } finally {
     if (yield cancelled()) {
-      yield put(fetchSearchErrorAction("fetch Facets cancelled"));
+      // ignore if cancelled ... there should be another request in flight
+      // TODO: do something useful here?
+      // yield put(fetchSearchErrorAction("fetch Facets cancelled"));
     }
   }
 }
