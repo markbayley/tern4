@@ -30,8 +30,8 @@ function Toggle() {
       </Button>
       <Button
        size="sm"
-        color="round"
-        onClick={() => dispatch(setSearchModeAction("Images"))}
+       color="round"
+       onClick={() => dispatch(setSearchModeAction("Images"))}
       >
         Images
       </Button>

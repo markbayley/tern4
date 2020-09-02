@@ -29,24 +29,24 @@
 
   .main-toggle {
     position: absolute;
-    right: 1%;
-    bottom: 4px;
+    // right: 1%;
+    // bottom: 4px;
     // left: 90%;
     // top: 157px;
-    // left: 400px;
-    // top: 220px;
+    left: 400px;
+    top: 220px;
     z-index: 100 !important;
   }
 
   @media (max-width: 1199px) {
     .main-toggle {
-      left: 40% !important;
-      bottom: 50px;
+      // left: 40% !important;
+      // bottom: 50px;
     }
   }
 
   @media (max-width: 899px) {
     .main-toggle {
-      display: none;
+      // display: none;
     }
   }

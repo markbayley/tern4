@@ -65,6 +65,18 @@
   // background-image: linear-gradient(to bottom right, #6EB3A6, #6EB3A6);
 }
 
+.image-count {
+  display: flex;
+  width: 120px; 
+  margin-right: 10px;
+}
+
+.image-input {
+  margin-top: 5px; 
+  margin-right: 5px;
+}
+
+
 .scroll-images {
   overflow-y: auto;
   overflow-x: hidden;

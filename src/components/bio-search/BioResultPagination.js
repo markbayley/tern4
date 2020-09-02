@@ -10,6 +10,7 @@ import {
   PaginationItem,
   PaginationLink,
   Button,
+  Input,
 } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { updateFilterAction, fetchSearchAction } from "../../store/reducer";
@@ -128,9 +129,13 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
     <div>
       <Row className="pagination-row">
         <Pagination className="pagination" size="md">
+          <div className="image-count">
+            <div className="image-input">Images: </div>
+            <Input placeholder="24" min={12} max={100} type="number" step="6" />
+          </div>
           <div className="mobile-pagination">
             <UncontrolledDropdown className="pageitems">
-              Sort By:{" "}
+              Sort Order:{" "}
               <DropdownToggle
                 size="sm"
                 caret
@@ -138,8 +143,6 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
                 id="dropdown-basic-button"
                 className="pageitems"
               >
-                Sort Order:
-                {" "}
                 {selectedSortOrder[0].sort_label}
               </DropdownToggle>
               <DropdownMenu>
@@ -154,9 +157,9 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
               </DropdownMenu>
             </UncontrolledDropdown>
           </div>
-          <div style={{ marginRight: "10px" }}>
+
+          {/* <div style={{ marginRight: "10px" }}>
             <UncontrolledDropdown className="pageitems">
-              Images / Page:{" "}
               <DropdownToggle
                 size="sm"
                 caret
@@ -181,7 +184,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
-          </div>
+          </div> */}
           <PaginationItem onClick={(e) => changePage(1, e)}>
             <PaginationLink first title="First" />
           </PaginationItem>
