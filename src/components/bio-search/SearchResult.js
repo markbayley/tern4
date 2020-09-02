@@ -1,19 +1,22 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { Card, Button, Col, Form } from "reactstrap";
 import "./SearchResult.scss";
+import { showImagePreviewAction } from "../../store/reducer";
 
 const SearchResult = ({
-  bioImageDocument,
+  imageIdx,
   embed,
-  showCarousel,
-  onClick,
-  toggle,
 }) => {
+  const dispatch = useDispatch();
+  const bioImageDocument = useSelector((state) => state.search.hits[imageIdx]["_source"]);
   const img_url_small = bioImageDocument.preview_urls[1].url;
   const img_url_large = bioImageDocument.preview_urls[0].url;
 
   const site_id = bioImageDocument["site_id"].value;
+
+  const showImagePreview = (idx) => dispatch(showImagePreviewAction(idx));
 
   return (
     <Col
@@ -26,12 +29,9 @@ const SearchResult = ({
       <Card id={site_id} className="image-card">
         <div className="hvrbox">
           <Button
-            variant="flat"
+            color="flat"
             className="image-card-button"
-            onClick={() => {
-              showCarousel();
-              onClick();
-            }}
+            onClick={() => showImagePreview(imageIdx)}
             style={{
               width: "100%",
               height: "0",
@@ -42,7 +42,6 @@ const SearchResult = ({
           >
             <img
               className="small_preview img-fluid"
-              onClick={toggle}
               src={img_url_small}
               alt="small preview"
               onKeyPress={() => { }}
@@ -50,7 +49,6 @@ const SearchResult = ({
             />
             <img
               className="large_preview img-fluid"
-              onClick={toggle}
               src={img_url_large}
               alt="large preview"
               onKeyPress={() => { }}
@@ -112,11 +110,8 @@ const SearchResult = ({
 };
 
 SearchResult.propTypes = {
-  bioImageDocument: PropTypes.objectOf(PropTypes.any).isRequired,
+  imageIdx: PropTypes.number.isRequired,
   embed: PropTypes.bool,
-  showCarousel: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired,
-  toggle: PropTypes.func.isRequired,
 };
 
 SearchResult.defaultProps = {

@@ -51,6 +51,8 @@ const searchReducer = createReducer(initialSearchState, {
 
 export const setSearchModeAction = createAction("SET_SEARCH_MODE");
 export const updateFilterAction = createAction("UPDATE_SEARCH_FILTER");
+export const showModalAction = createAction("SHOW_IMAGE_MODAL");
+export const showImagePreviewAction = createAction("SHOW_IMAGE_PREVIEW");
 
 // UI state reducers
 const initialUiState = {
@@ -76,6 +78,10 @@ const initialUiState = {
       sort_column: "file_created",
     },
   },
+  imageModal: {
+    show: false,
+    imageIdx: 0,
+  },
 };
 
 const uiReducer = createReducer(initialUiState, {
@@ -85,6 +91,18 @@ const uiReducer = createReducer(initialUiState, {
   // updateFilterAction leaves filters not mentioned in payload unchanged
   [updateFilterAction]: (state, action) => {
     Object.assign(state.searchFilters, action.payload);
+  },
+  [fetchSearchDoneAction]: (state) => {
+    state.imageModal.imageIdx = 0;
+  },
+  [showModalAction]: (state, action) => {
+    state.imageModal.show = action.payload;
+  },
+  [showImagePreviewAction]: (state, action) => {
+    state.imageModal = {
+      show: true,
+      imageIdx: action.payload,
+    };
   },
 });
 
