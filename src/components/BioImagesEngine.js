@@ -77,7 +77,7 @@ const BioImagesEngine = () => {
               <SearchEngine />
               <Button
                 className="main-toggle"
-                size="md"
+                size="sm"
                 color="round"
                 onClick={() => dispatch(setSearchModeAction("Map"))}
               >
