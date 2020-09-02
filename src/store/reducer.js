@@ -28,12 +28,11 @@ const searchReducer = createReducer(initialSearchState, {
   },
   [fetchSearchDoneAction]: (state, action) => {
     state.isLoadingSearch = false;
-    const { hits, page_num, page_size } = action.payload;
+    const { hits } = action.payload;
     if (hits) {
       // Null, Undefined, Empty, Whatever .... All Means No Results
       state.hits = hits.hits;
       state.totalDocuments = hits.total.value;
-      state.pagination = { page_size, page_num };
     }
   },
   [fetchSearchErrorAction]: (state, action) => {
@@ -90,6 +89,25 @@ const uiReducer = createReducer(initialUiState, {
   },
   // updateFilterAction leaves filters not mentioned in payload unchanged
   [updateFilterAction]: (state, action) => {
+    const { pagination } = action.payload;
+    // TODO: this is a bad workaround to avoid issues with paging past 10000 results
+    //       we need a better way to deal with that but for now this avoids errors
+    if (pagination) {
+      // we are updating pagination
+      if (state.searchFilters.pagination.page_size !== pagination.page_size) {
+        // updating page_size ... re-calc page_num
+        pagination.page_num = Math.floor(
+          (state.searchFilters.pagination.page_size * state.searchFilters.pagination.page_num)
+          / pagination.page_size,
+        );
+      }
+      // check if page_num * page_size > 10000
+      if ((pagination.page_num * pagination.page_size) > 10000) {
+        // fix page_num to last page
+        pagination.page_num = Math.floor(10000 / pagination.page_size);
+      }
+      action.payload.pagination = pagination;
+    }
     Object.assign(state.searchFilters, action.payload);
   },
   [fetchSearchDoneAction]: (state) => {
