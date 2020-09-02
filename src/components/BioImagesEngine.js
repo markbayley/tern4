@@ -12,7 +12,7 @@ import {
   fetchFacetsAction,
   setSearchModeAction,
 } from "../store/reducer";
-import LeftSideBar from "../animations/LeftSideBar";
+// import LeftSideBar from "../animations/LeftSideBar";
 // import MobileSidebar from "./test/MobileSidebar";
 
 /* Map Image Toggle */
@@ -51,7 +51,7 @@ const BioImagesEngine = () => {
     <>
       <SearchBar />
 
-      <LeftSideBar searchmode={searchMode} />
+      {/* <LeftSideBar searchmode={searchMode} /> */}
       <Row>
         {/* Filter SideBar */}
         <Col xs="auto" className="filter-bar">
