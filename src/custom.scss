@@ -5,7 +5,7 @@
   height: 80vh;
   margin: 0px;
   padding-right: 0px;
-  // width: 400px;
+  width: 400px;
   // border-right: 60px solid #B3D4C9;
   z-index: 9;
   // background-image: linear-gradient(to bottom right, #fff, #B3D4C9);
@@ -202,15 +202,15 @@
 
  @media (max-width: 768px) {
   #place{
-    font-size: 15px;
+    // font-size: 15px;
     }
   .login {
     display: none;
   }
   .searchbar {
-    background-size: 390px 60px;
-    display: flex;
-    justify-content: flex-start;
+    // background-size: 390px 60px;
+    // display: flex;
+    // justify-content: flex-start;
   }
 
 }

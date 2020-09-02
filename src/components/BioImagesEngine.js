@@ -52,7 +52,7 @@ const BioImagesEngine = () => {
       <SearchBar />
       <Row>
         {/* Filter SideBar */}
-        <Col xs="auto" className="filter-bar">
+        <Col xs={12} md="auto" className="filter-bar">
           <FilterHeader />
           <ImageSearchEngine />
           <Favourite />
