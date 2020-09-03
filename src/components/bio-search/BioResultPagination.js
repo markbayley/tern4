@@ -129,9 +129,33 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
     <div>
       <Row className="pagination-row">
         <Pagination className="pagination" size="md">
-          <div className="image-count">
-            <div className="image-input">Images: </div>
-            <Input placeholder="24" min={12} max={100} type="number" step="6" />
+          <div style={{ marginRight: "10px" }}>
+            <UncontrolledDropdown className="pageitems">
+              Images / Page:{" "}
+              <DropdownToggle
+                size="sm"
+                caret
+                color="pageitems"
+                id="dropdown-basic-button"
+                className="pageitems"
+              >
+                {`${page_size}`}
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem onClick={() => handlePageSizeChange(10)}>
+                  10 per page
+                </DropdownItem>
+                <DropdownItem onClick={() => handlePageSizeChange(25)}>
+                  25 per page
+                </DropdownItem>
+                <DropdownItem onClick={() => handlePageSizeChange(50)}>
+                  50 per page
+                </DropdownItem>
+                <DropdownItem onClick={() => handlePageSizeChange(100)}>
+                  100 per page
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
           </div>
           <div className="mobile-pagination">
             <UncontrolledDropdown className="pageitems">
@@ -158,33 +182,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
             </UncontrolledDropdown>
           </div>
 
-          {/* <div style={{ marginRight: "10px" }}>
-            <UncontrolledDropdown className="pageitems">
-              <DropdownToggle
-                size="sm"
-                caret
-                color="pageitems"
-                id="dropdown-basic-button"
-                className="pageitems"
-              >
-                {`${page_size}`}
-              </DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem onClick={() => handlePageSizeChange(10)}>
-                  10 per page
-                </DropdownItem>
-                <DropdownItem onClick={() => handlePageSizeChange(25)}>
-                  25 per page
-                </DropdownItem>
-                <DropdownItem onClick={() => handlePageSizeChange(50)}>
-                  50 per page
-                </DropdownItem>
-                <DropdownItem onClick={() => handlePageSizeChange(100)}>
-                  100 per page
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          </div> */}
+
           <PaginationItem onClick={(e) => changePage(1, e)}>
             <PaginationLink first title="First" />
           </PaginationItem>
@@ -208,6 +206,10 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
               }
               return null;
             })}
+          </div>
+          <div className="page-input">
+            {/* <div className="image-input">Page: </div> */}
+            <Input placeholder="24" min={12} max={100} type="number" step="6" />
           </div>
           <PaginationItem onClick={nextPage}>
             <PaginationLink next title="Next" />
