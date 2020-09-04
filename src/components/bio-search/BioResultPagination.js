@@ -209,7 +209,7 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
           </div>
           <div className="page-input">
             {/* <div className="image-input">Page: </div> */}
-            <Input placeholder="24" min={12} max={100} type="number" step="6" />
+            <Input placeholder="24" min={10} max={100} />
           </div>
           <PaginationItem onClick={nextPage}>
             <PaginationLink next title="Next" />
@@ -217,16 +217,16 @@ const BioResultPagination = ({ page_size, page_num, totalDocuments }) => {
           <PaginationItem onClick={(e) => changePage(pages, e)}>
             <PaginationLink last title="Last" />
           </PaginationItem>
-          <Button
+          <div
             className="page-items"
             color="flat"
             size="md"
-            style={{ marginLeft: "10px", fontSize: "16px" }}
+            style={{ marginLeft: "10px", fontSize: "16px", paddingTop: "7px" }}
           >
             {/* Showing
             {" "} */}
-            {page_size} / {totalDocuments} Images
-          </Button>
+            {page_size} / {totalDocuments} Pages
+          </div>
         </Pagination>
       </Row>
     </div>
